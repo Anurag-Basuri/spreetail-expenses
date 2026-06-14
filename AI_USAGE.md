@@ -31,3 +31,13 @@ As requested in the assignment, while the AI is a powerful accelerator, the huma
 *   **The Error:** When asked to implement the debt simplification algorithm ("one number per person"), the AI initially provided a naive greedy algorithm. While it worked for simple linear chains, it failed to identify and eliminate circular debts (e.g., A owes B $10, B owes C $10, C owes A $10).
 *   **How I Caught It:** I did not trust the AI's algorithm blindly. I wrote a suite of `pytest` unit tests specifically targeting edge cases in debt graphs, including circular dependencies. The AI's initial implementation returned three unnecessary transactions instead of simplifying the circular debt to zero.
 *   **What I Changed:** I discarded the naive approach. I guided the AI to implement a more robust algorithm (similar to the standard Splitwise algorithm) that first calculates the absolute net balances for every user, separates them into lists of net-debtors and net-creditors, and then matches the largest debtors with the largest creditors iteratively until all net balances are zero. This correctly passed all unit test edge cases.
+
+### Case 4: Environment Nuances and Package Dependencies
+*   **The Error:** I attempted to install `psycopg2-binary` on a Windows environment running a Python version without pre-built binary wheels. The installation failed because it required compiling from source, which in turn required `pg_config` from a full PostgreSQL installation that was not present in the environment's path.
+*   **How I Caught It:** The terminal threw a massive stack trace during the `pip install` phase.
+*   **What I Changed:** I adapted the strategy to rely on the standard synchronous database operations using `psycopg2` via the pre-existing environment setup, avoiding unnecessary async dependencies or compilation errors.
+
+### Case 5: Fuzzy String Matching False Positives
+*   **The Error:** When building the name normalizer (`app/utils/name_normalizer.py`), I needed a "starts with" fuzzy match so that `"Priya S"` would resolve to `"Priya"`. A naive `.startswith("Priya")` approach would incorrectly match strings like `"Priyas"` or `"Dev's friend Kabir"` (to `"Dev"`).
+*   **How I Caught It:** Through explicit test case design based on the CSV anomalies provided in the project prompt. I noted that `"Dev's friend Kabir"` was meant to be flagged as an entirely unknown participant, not a fuzzy match for `"Dev"`.
+*   **What I Changed:** I implemented a strict word-boundary check by appending a space to the normalized known name: `.startswith(k_norm + " ")`. This ensures `"Priya S".startswith("Priya ")` succeeds, while `"Dev'S Friend Kabir".startswith("Dev ")` accurately fails, preserving Meera's anomaly constraints.

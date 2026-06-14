@@ -62,3 +62,18 @@ This document records the significant architectural and product decisions made d
     *   *Live API conversion:* Convert on the fly during rendering. (Rejected: Unpredictable historical balances).
     *   *Record Exchange Rate per Expense:* Save the exact exchange rate applicable on the specific `expense_date`.
 *   **Rationale:** Priya noted the trip was in dollars but the sheet uses rupees. By allowing an expense to have an `original_currency` (USD), `amount` ($100), and an `exchange_rate` (e.g., 83 INR/USD), we calculate a `base_currency_amount` (₹8300) which is then split. This freezes the value in time, preventing historical debts from fluctuating with live market rates.
+
+## 8. Date Parsing Determinism
+
+*   **Decision:** Explicit Regex matching instead of `dateutil`.
+*   **Rationale:** The `dateutil` library silently guesses formats (e.g. interpreting `04/05` randomly depending on locale). To ensure accurate detection of `AMBIGUOUS_DATE` anomalies, we implemented deterministic Regex parsing.
+
+## 9. Safe CSV Ingestion Pipeline
+
+*   **Decision:** Nested Database Transactions (`db.begin_nested()`).
+*   **Rationale:** The CSV import processes rows iteratively. If a complex math error occurs during `Expense` creation (e.g. percentages not exactly summing to 100%), we must rollback *only* that specific row and flag it, rather than aborting the entire CSV import. Savepoints allow granular error recovery.
+
+## 10. Expense Soft Deletes
+
+*   **Decision:** Implement `is_deleted` on the `Expense` model.
+*   **Rationale:** Users need to be able to "delete" expenses from the UI without permanently destroying the audit log required by Rohan. A soft delete retains the historical record while excluding it from the `balance_service` simplification logic.

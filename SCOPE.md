@@ -187,7 +187,7 @@ Our application relies on a strict relational model (PostgreSQL) to ensure ACID 
 
 #### 4. `Expenses`
 *   **Why it exists:** The core record of a real-world transaction. It stores the *normalized* value of the expense. To solve Priya's USD issue, we don't force users to do math outside the app. We store the `original_currency` and `exchange_rate` so the system always knows the exact value in the group's `base_currency` at the moment the expense occurred.
-*   **Schema:** `id` (PK), `group_id` (FK -> Groups), `description` (String), `expense_date` (Date), `total_amount` (Decimal), `original_currency` (String), `exchange_rate` (Decimal).
+*   **Schema:** `id` (PK), `group_id` (FK -> Groups), `description` (String), `expense_date` (Date), `total_amount` (Decimal), `original_currency` (String), `exchange_rate` (Decimal), `is_deleted` (Boolean, Soft Delete).
 *   **Joins:** Belongs to a single `Group` (`group_id`).
 
 #### 5. `ExpenseSplits`

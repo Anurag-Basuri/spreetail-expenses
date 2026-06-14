@@ -2,7 +2,7 @@ import re
 from datetime import date
 from decimal import Decimal, InvalidOperation
 from enum import Enum
-from dataclass import dataclass
+from dataclasses import dataclass
 from typing import Literal, List, Dict, Tuple, Any, Optional
 
 from app.utils.name_normalizer import match_to_member, normalize_name
@@ -147,7 +147,7 @@ def detect_anomalies(
 
     # 9. SETTLEMENT_AS_EXPENSE
     desc = row.get('description', '').lower()
-    if not split_type or 'settlement' in desc or 'paid back' in desc or 'deposit' in desc:
+    if 'settlement' in desc or 'paid back' in desc or 'deposit' in desc:
         anomalies.append(Anomaly(
             row_number, AnomalyType.SETTLEMENT_AS_EXPENSE, "WARNING",
             "Row looks like a settlement but is logged as an expense.", desc, "AUTO_FIXED: Convert to Settlement record", True, "settlement"
@@ -175,7 +175,7 @@ def detect_anomalies(
         prev_amt = None
         try:
             prev_amt = Decimal(prev.get('amount', '').replace(',','').strip())
-        except:
+        except Exception:
             pass
             
         p_date, _ = parse_date(prev.get('date', ''))

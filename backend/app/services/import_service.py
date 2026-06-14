@@ -87,7 +87,7 @@ def run_import(db: Session, file_bytes: bytes, group_id: int, run_id: str, curre
         final_amount_str = cleaned_row.get('amount', '0').replace(',', '')
         try:
             amt = Decimal(final_amount_str)
-        except:
+        except Exception:
             amt = Decimal("0")
             
         final_curr = cleaned_row.get('currency', 'INR') or 'INR'

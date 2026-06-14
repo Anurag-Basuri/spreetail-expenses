@@ -1,0 +1,6 @@
+# Python virtual env and cache
+backend/venv/
+backend/__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store

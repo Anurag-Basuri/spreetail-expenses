@@ -1,29 +1,52 @@
-# EquiSplit - Shared Expenses Application
+# EquiSplit - Shared Expenses & Interactive Settlement Application
 
 ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![SQLite/PostgreSQL](https://img.shields.io/badge/Database-SQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
-EquiSplit is a robust web application designed to track shared expenses among flatmates and travel groups. It handles dynamic group memberships, multi-currency expenses, detailed audit trails, and provides a powerful data import pipeline with anomaly detection and user approval workflows.
+EquiSplit is a robust, full-stack web application meticulously engineered to track shared expenses among flatmates and travel groups. Moving beyond simple calculators, EquiSplit handles complex real-world edge cases: dynamic time-bound group memberships, multi-currency expenses needing historical exchange rates, detailed immutable audit trails, and a sophisticated data import pipeline armed with rigorous anomaly detection and an interactive human-in-the-loop review system.
 
-## Features
+## 🎯 Core Features
 
-- **Authentication:** Secure login and registration.
-- **Group Management:** Create groups and manage time-bound memberships.
-- **Expense Tracking:** Add expenses, split them in various ways (Equal, Exact, Percentage, Shares), and track in multi-currency.
-- **Smart Importer:** Robust CSV ingestion pipeline with an interactive UI to detect and resolve legacy data anomalies (duplicates, conflicting entries).
-- **Settlements:** Calculate simplified debts and record payments.
+- **Smart Interactive Importer:** A specialized CSV ingestion pipeline designed to ingest highly problematic legacy data. The system automatically scrubs data (e.g. whitespace, commas), resolves minor typos using fuzzy-matching algorithms, and flags major conflicts (duplicates, negative amounts, unknown currencies, temporal paradoxes). It provides an interactive UI forcing human review and approval for destructive actions, ensuring high data fidelity.
+- **Graph-Based Debt Simplification:** Condenses complex webs of interpersonal debts into the absolute minimum number of transactions needed to settle all balances (e.g., "Aisha owes Rohan ₹500").
+- **Dynamic Memberships:** Calculates split allocations accurately by evaluating user presence against exact timestamped entry (`joined_at`) and exit (`left_at`) dates.
+- **Multi-Currency Normalization:** Freezes the value of foreign currency purchases to a baseline local currency using precise exchange rates at the time of the transaction, eliminating the chaos of fluctuating live market rates.
+- **Granular Splitting Methods:** Supports equal divisions, exact monetary amounts, exact percentages, and fractional shares.
 
-## Prerequisites
+---
 
-Before you begin, ensure you have met the following requirements:
+## 🏗️ Architecture & Technology Stack
+
+The application is structured into a cleanly decoupled frontend and backend, ensuring separation of concerns, scalability, and ease of testing.
+
+### Backend: FastAPI & Python
+
+The backend is a high-performance REST API built with **FastAPI** (Python 3.9+). 
+- **Validation & Serialization:** Relies extensively on **Pydantic v2** to strongly type input schemas, preventing malformed data from ever touching the database layer.
+- **Database Layer:** Built on **SQLAlchemy 2.0** using the modern declarative `Mapped` style, heavily utilizing foreign keys and nested database transactions (`db.begin_nested()`) to allow granular rollback of failed CSV row insertions.
+- **Database Engine:** Capable of running on local **SQLite** for zero-configuration development, but engineered for strict ACID compliance on **PostgreSQL** in production environments.
+- **Schema Migrations:** Managed reliably using **Alembic**.
+- **Anomaly Engine:** A specialized module (`anomaly_detector.py`) that evaluates incoming records against 22 known historical data anomalies ranging from name typos to negative amounts.
+
+### Frontend: Next.js (App Router)
+
+The frontend is a modern React application utilizing the **Next.js App Router** paradigm.
+- **Component Design:** Focuses on rich, dynamic, and premium UI aesthetics using **Tailwind CSS**. Custom UI components include interactive carousels, responsive tables, and micro-animations for enhanced user engagement.
+- **State Management:** Leverages native React Context and Hooks to manage local state, minimizing overhead.
+- **Routing & Layouts:** Employs nested file-system routing to neatly separate the core dashboard functionality from the specialized, wizard-like Data Import Review interface.
+- **Data Fetching:** Relies on modern fetch mechanisms with `SWR` or React Query (TBD) for optimistic UI updates and real-time reflection of the backend state.
+
+---
+
+## 🚀 Setup & Installation Instructions
+
+### Prerequisites
 - **Node.js** (v18.0.0 or newer)
 - **Python** (v3.9 or newer)
-- **PostgreSQL** database instance
+- **Git**
 
-## Setup Instructions
-
-### 1. Backend Setup (FastAPI)
+### 1. Backend Setup
 
 1. Navigate to the backend directory:
    ```bash
@@ -43,20 +66,23 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    pip install -r requirements.txt
    ```
-   *(Note: Requirements file to be updated. Core packages include `fastapi`, `uvicorn`, `sqlalchemy`, `alembic`, `psycopg2-binary`)*
-4. Set up your environment variables (e.g., `DATABASE_URL`) in a `.env` file.
-5. Run database migrations:
+4. Set up the local environment variables. Simply copy the example file:
+   ```bash
+   cp .env.example .env
+   ```
+   *(Note: The default `.env` is configured to use an embedded SQLite database `test.db` for instant development setup.)*
+5. Run the database migrations to build the schema:
    ```bash
    alembic upgrade head
    ```
 6. Start the development server:
    ```bash
-   fastapi dev main.py
+   fastapi dev app/main.py
    # Or using uvicorn directly:
-   uvicorn main:app --reload
+   uvicorn app.main:app --reload
    ```
 
-### 2. Frontend Setup (Next.js)
+### 2. Frontend Setup
 
 1. Navigate to the frontend directory:
    ```bash
@@ -70,35 +96,23 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    npm run dev
    ```
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to explore the dashboard.
 
-## Project Structure
+---
 
-```text
-spreetail-expenses/
-├── backend/            # FastAPI application, SQLAlchemy models, Alembic migrations
-├── frontend/           # Next.js App Router, Tailwind CSS UI components
-├── target.md           # Application design and architecture specification
-└── README.md           # Project documentation
-```
+## 🤖 AI Collaboration Notes
 
-## AI Development Partner
+This project is actively developed in collaboration with **Antigravity**, an advanced agentic coding assistant engineered by Google DeepMind. 
+We adhere strictly to defined guidelines for AI collaboration, logging key decisions and prompt architecture in `DECISIONS.md` and logging prompt engineering iterations or corrections in `AI_USAGE.md`. All AI-generated code is audited by human engineers prior to commits.
 
-This project is being developed with the assistance of **Antigravity**, an advanced agentic coding assistant designed by the Google DeepMind team. The AI is utilized for:
-- Architecture planning and system design (`target.md`).
-- Project scaffolding and environment setup.
-- Writing boilerplate code, database models, and API endpoints.
-- Building frontend components and styling using Tailwind CSS.
-- Problem-solving and debugging complex application logic (such as the data import pipeline).
-
-All code produced is reviewed and overseen by human engineers to ensure quality and adherence to project requirements.
-
-## Roadmap & Progress
+## 🗺️ Roadmap & Progress
 
 - [x] Initial architecture and product design (`target.md`).
 - [x] Repository scaffolding (Frontend & Backend setups).
-- [ ] Database schema creation (Users, Groups, Expenses).
-- [ ] Core REST APIs (Authentication, Group Management).
-- [ ] Next.js Frontend layouts and components.
-- [ ] The "Smart" CSV Data Import pipeline & rules engine.
-- [ ] Interactive UI for anomaly resolution.
+- [x] Database schema creation & Alembic Migrations.
+- [x] Core REST APIs (Authentication, Group Management).
+- [x] The "Smart" CSV Data Import pipeline & rules engine.
+- [x] Interactive API endpoints for anomaly resolution.
+- [ ] Next.js Frontend Foundation & Theme Config.
+- [ ] Next.js Frontend Dashboard and Forms.
+- [ ] Interactive React UI for the Import Review Process.

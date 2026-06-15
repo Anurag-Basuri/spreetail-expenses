@@ -4,159 +4,159 @@
 
 Below is the log of the 22 anomalies detected during the ingestion of `expenses_export.csv`. Each entry details the raw problem, our detection logic, the applied resolution policy (often requiring explicit user approval via the Interactive Dashboard), and the final database state.
 
-### 1. Negative Amount (Refund)
+### 1. Exact duplicate
+*   **Row number:** 5-6
+*   **What the problem is:** "Dinner at Marina Bites" and "dinner - marina bites" — same date, same amount, same payer, same split. Exact duplicate.
+*   **How your importer detects it:** `DUPLICATE` anomaly checks for same date, normalized description, amount, and payer.
+*   **What policy you applied:** Flagged in UI. User selects "Merge into One".
+*   **What ends up in the database:** Only a single `Expenses` record is created.
+
+### 2. Malformed data
+*   **Row number:** 7
+*   **What the problem is:** amount = "1,200" — comma inside the number breaks numeric parsing.
+*   **How your importer detects it:** `MALFORMED_AMOUNT` detects commas in string.
+*   **What policy you applied:** Auto-fixed by stripping commas.
+*   **What ends up in the database:** `1200` stored in `Expenses`.
+
+### 3. Name inconsistency (Lowercase)
+*   **Row number:** 9
+*   **What the problem is:** paid_by = "priya" — lowercase, doesn't match "Priya".
+*   **How your importer detects it:** `NAME_INCONSISTENCY` detects a fuzzy match (titlecasing).
+*   **What policy you applied:** Auto-fixed to "Priya".
+*   **What ends up in the database:** Mapped to Priya's user ID.
+
+### 4. Name inconsistency (Extra Initial)
+*   **Row number:** 11
+*   **What the problem is:** paid_by = "Priya S" — extra surname initial, doesn't match "Priya".
+*   **How your importer detects it:** `NAME_INCONSISTENCY` via fuzzy string prefix matching.
+*   **What policy you applied:** Auto-fixed to "Priya".
+*   **What ends up in the database:** Mapped to Priya's user ID.
+
+### 5. Rounding / Excess Decimals
+*   **Row number:** 10
+*   **What the problem is:** amount = 899.995 — three decimal places, rounding policy unclear.
+*   **How your importer detects it:** `EXCESS_DECIMALS` anomaly triggers if places > 2.
+*   **What policy you applied:** Auto-fixed to 900.00 using standard `ROUND_HALF_UP`.
+*   **What ends up in the database:** `900.00` in `Expenses`.
+
+### 6. Missing field (paid_by)
+*   **Row number:** 13
+*   **What the problem is:** paid_by = "" — House cleaning supplies has NO payer.
+*   **How your importer detects it:** `MISSING_PAYER` string emptiness check.
+*   **What policy you applied:** Hard Flag. User forced to select a payer.
+*   **What ends up in the database:** `Expenses` record created with selected `payer_id`.
+
+### 7. Settlement as expense (Rohan paid Aisha back)
 *   **Row number:** 14
-*   **What the problem is (exact raw CSV value):** Amount: `-500`, Description: `Refund for cancelled train`
-*   **How your importer detects it:** The parsed numeric value in the 'Amount' column is less than 0.
-*   **What policy you applied:** Flagged in UI. User explicitly selected the "Treat as Refund" policy.
-*   **What ends up in the database:** Inserted into `Expenses` with a negative `total_amount` (-500). The `ExpenseSplits` reflect negative owed amounts, crediting the original payers.
+*   **What the problem is:** "Rohan paid Aisha back" — no split_type, note says "this is a settlement not an expense". Logged as an expense.
+*   **How your importer detects it:** `SETTLEMENT_AS_EXPENSE` keyword detection in description.
+*   **What policy you applied:** Flagged/Auto-fixed to convert to `Settlements` table.
+*   **What ends up in the database:** Inserted into the `Settlements` table.
 
-### 2. Negative Amount (Data Entry Error)
+### 8. Invalid percentages
+*   **Row number:** 15
+*   **What the problem is:** Pizza Friday percentages: 30+30+30+20 = 110%, not 100%. Invalid split.
+*   **How your importer detects it:** `INVALID_PERCENTAGES` using regex extraction of %s.
+*   **What policy you applied:** Flagged. User must adjust percentages.
+*   **What ends up in the database:** `ExpenseSplits` created using adjusted percentages.
+
+### 9. Date format chaos
+*   **Row number:** 16–34
+*   **What the problem is:** Date formats are completely inconsistent: 2026-02-01, 01/03/2026, 03/03/2026, Mar 14, 04/05/2026.
+*   **How your importer detects it:** Handled by standard `date_parser`. Throws various warnings.
+*   **What policy you applied:** Regex parser dynamically converts standard EU/US formats to ISO.
+*   **What ends up in the database:** Clean `YYYY-MM-DD` representation.
+
+### 10. Unknown member
+*   **Row number:** 23
+*   **What the problem is:** Parasailing split includes "Dev's friend Kabir" — NOT a registered member of the group.
+*   **How your importer detects it:** `UNKNOWN_PARTICIPANT` fails name matching.
+*   **What policy you applied:** Flagged. User maps to Dev or creates user.
+*   **What ends up in the database:** `ExpenseSplits` maps to the designated user ID.
+
+### 11. Near-duplicate conflict
+*   **Row number:** 24–25
+*   **What the problem is:** "Dinner at Thalassa" (Aisha, ₹2400) AND "Thalassa dinner" (Rohan, ₹2450) — same dinner, two entries, different amounts, different payers. Which one wins?
+*   **How your importer detects it:** `NEAR_DUPLICATE` checks keyword intersections.
+*   **What policy you applied:** Flagged. User selects one row to reject and one to approve.
+*   **What ends up in the database:** Only the approved row makes it to `Expenses`.
+
+### 12. Negative amount
+*   **Row number:** 26
+*   **What the problem is:** amount = -30 USD (Parasailing refund) — negative amount. Refund or error?
+*   **How your importer detects it:** `NEGATIVE_AMOUNT` logic check < 0.
+*   **What policy you applied:** Flagged. User verifies.
+*   **What ends up in the database:** Inserted into `Expenses` with negative total.
+
+### 13. Ambiguous date (Incomplete)
+*   **Row number:** 27
+*   **What the problem is:** date = "Mar 14" — no year, no day ordinal zero-pad.
+*   **How your importer detects it:** `AMBIGUOUS_DATE` (Incomplete date) via date parser regex `Month DD`.
+*   **What policy you applied:** Auto-fixed by filling in the context year (2026).
+*   **What ends up in the database:** `2026-03-14`.
+
+### 14. Name whitespace
+*   **Row number:** 27
+*   **What the problem is:** paid_by = "rohan " — trailing space. Doesn't match "Rohan".
+*   **How your importer detects it:** `NAME_INCONSISTENCY` normalization check.
+*   **What policy you applied:** Auto-fixed.
+*   **What ends up in the database:** Mapped to Rohan's user ID.
+
+### 15. Missing currency
 *   **Row number:** 28
-*   **What the problem is (exact raw CSV value):** Amount: `-450`, Description: `Groceries`
-*   **How your importer detects it:** Parsed amount < 0.
-*   **What policy you applied:** Flagged in UI. User recognized it as a typo and selected "Edit Amount" policy, changing it to 450.
-*   **What ends up in the database:** Inserted into `Expenses` with `total_amount` = 450.
+*   **What the problem is:** currency = "" — Groceries DMart has no currency.
+*   **How your importer detects it:** `MISSING_CURRENCY` check.
+*   **What policy you applied:** Auto-fixed to INR.
+*   **What ends up in the database:** `INR`.
 
-### 3. Exact Duplicate (Row 1)
-*   **Row number:** 42
-*   **What the problem is (exact raw CSV value):** Date: `2024-02-15`, Desc: `Wifi Bill`, Payer: `Aisha`, Amount: `1200`
-*   **How your importer detects it:** Exact match on Date, Desc, Payer, and Amount with Row 43.
-*   **What policy you applied:** Grouped in UI. User selected "Merge into One" policy.
-*   **What ends up in the database:** Only a single `Expenses` record is created for the Wifi Bill.
+### 16. Whitespace in amount
+*   **Row number:** 29
+*   **What the problem is:** amount = " 1450 " — leading and trailing whitespace inside the amount field.
+*   **How your importer detects it:** `WHITESPACE_IN_AMOUNT` length delta check.
+*   **What policy you applied:** Auto-fixed.
+*   **What ends up in the database:** Decimal `1450.00`.
 
-### 4. Exact Duplicate (Row 2)
-*   **Row number:** 43
-*   **What the problem is (exact raw CSV value):** Date: `2024-02-15`, Desc: `Wifi Bill`, Payer: `Aisha`, Amount: `1200`
-*   **How your importer detects it:** Exact match with Row 42.
-*   **What policy you applied:** Grouped in UI. User selected "Merge into One" policy.
-*   **What ends up in the database:** Dropped. No database entry for this specific row.
+### 17. Zero-amount expense
+*   **Row number:** 31
+*   **What the problem is:** amount = 0 — Swiggy order is zero, note says "counted twice earlier".
+*   **How your importer detects it:** `ZERO_AMOUNT` logic check.
+*   **What policy you applied:** Flagged as ERROR to either drop or provide amount.
+*   **What ends up in the database:** Dropped if user chooses reject.
 
-### 5. Conflicting Duplicate (Version A)
-*   **Row number:** 55
-*   **What the problem is (exact raw CSV value):** Date: `2024-02-20`, Desc: `Dinner at Taj`, Payer: `Rohan`, Amount: `4500`
-*   **How your importer detects it:** Match on Date, Desc, and Payer with Row 56, but amounts differ.
-*   **What policy you applied:** Flagged as Conflict. User investigated and selected "Pick Row A (4500)" policy.
-*   **What ends up in the database:** Inserted into `Expenses` with `total_amount` = 4500.
+### 18. Ambiguous date format
+*   **Row number:** 34
+*   **What the problem is:** date = "04/05/2026" — ambiguous. Is it April 5 (DD/MM) or May 4 (MM/DD)?
+*   **How your importer detects it:** `AMBIGUOUS_DATE` flags dates where day < 12 and month < 12.
+*   **What policy you applied:** Flagged/Auto-fixed depending on context. Default DD/MM in India context.
+*   **What ends up in the database:** `2026-05-04`.
 
-### 6. Conflicting Duplicate (Version B)
-*   **Row number:** 56
-*   **What the problem is (exact raw CSV value):** Date: `2024-02-20`, Desc: `Dinner at Taj`, Payer: `Rohan`, Amount: `4800`
-*   **How your importer detects it:** Match with Row 55, different amount.
-*   **What policy you applied:** Flagged as Conflict. User explicitly discarded this row in favor of Row 55.
-*   **What ends up in the database:** Dropped entirely.
+### 19. Inactive member in split
+*   **Row number:** 36
+*   **What the problem is:** April 2 groceries split includes Meera, who moved out end of March.
+*   **How your importer detects it:** `INACTIVE_MEMBER` checks `expense_date` against `GroupMemberships.left_at`.
+*   **What policy you applied:** Flagged. User drops Meera from split.
+*   **What ends up in the database:** No `ExpenseSplits` row for Meera.
 
-### 7. Settlement logged as Expense (Rohan -> Aisha)
-*   **Row number:** 72
-*   **What the problem is (exact raw CSV value):** Desc: `Paid Aisha back for Feb rent`, Payer: `Rohan`, Amount: `15000`
-*   **How your importer detects it:** Keyword detection in Description column ("Paid ... back").
-*   **What policy you applied:** Flagged as potential settlement. User confirmed and selected "Convert to Settlement". User mapped Payee to Aisha.
-*   **What ends up in the database:** Inserted into the `Settlements` table (Payer: Rohan, Payee: Aisha, Amount: 15000). No `Expenses` record created.
-
-### 8. Settlement logged as Expense (Sam -> Dev)
-*   **Row number:** 105
-*   **What the problem is (exact raw CSV value):** Desc: `Transfer to Dev`, Payer: `Sam`, Amount: `2000`
-*   **How your importer detects it:** Keyword detection ("Transfer to").
-*   **What policy you applied:** Flagged. User selected "Convert to Settlement".
+### 20. Settlement as expense (Sam deposit)
+*   **Row number:** 38
+*   **What the problem is:** "Sam deposit share" — Sam pays ₹15,000 to Aisha.
+*   **How your importer detects it:** `SETTLEMENT_AS_EXPENSE` keyword "deposit".
+*   **What policy you applied:** Convert to Settlement.
 *   **What ends up in the database:** Inserted into `Settlements` table.
 
-### 9. Pre-Join Expense (Sam's Issue)
-*   **Row number:** 88
-*   **What the problem is (exact raw CSV value):** Date: `2024-03-15`, Desc: `March Electricity`, Split involves `Sam`.
-*   **How your importer detects it:** Expense Date (Mar 15) is strictly less than Sam's `GroupMemberships.joined_at` date (Mid-April).
-*   **What policy you applied:** Flagged. System defaulted to removing Sam from the split. User clicked "Accept Exclusion".
-*   **What ends up in the database:** Inserted into `Expenses`. In the `ExpenseSplits` table, Sam has no record. The total amount is redistributed equally among the remaining active members.
+### 21. Split type conflict
+*   **Row number:** 42
+*   **What the problem is:** "Furniture for common room" has split_type = equal but split_details = "Aisha 1; Rohan 1; Priya 1; Sam 1". Conflicting fields.
+*   **How your importer detects it:** `SPLIT_TYPE_CONFLICT` if equal but details provided.
+*   **What policy you applied:** Auto-fixed.
+*   **What ends up in the database:** `ExpenseSplits` processed as shares.
 
-### 10. Post-Leave Expense (Meera's Issue)
-*   **Row number:** 112
-*   **What the problem is (exact raw CSV value):** Date: `2024-04-05`, Desc: `April Groceries`, Split involves `Meera`.
-*   **How your importer detects it:** Expense Date (Apr 5) is strictly greater than Meera's `GroupMemberships.left_at` date (End of March).
-*   **What policy you applied:** Flagged. User selected "Override and Include" because Meera consumed the groceries before leaving but they were bought later.
-*   **What ends up in the database:** Inserted into `Expenses`. `ExpenseSplits` includes a record for Meera despite her inactive status on that date.
-
-### 11. Hidden Currency (Priya's USD Issue)
-*   **Row number:** 120
-*   **What the problem is (exact raw CSV value):** Desc: `Trip souvenirs USD`, Amount: `45`
-*   **How your importer detects it:** Regex match for currency codes ("USD") in the description or notes, coupled with unusually low amount compared to the group's INR baseline.
-*   **What policy you applied:** Flagged. User selected "Convert to Base Currency" policy and inputted the historical exchange rate (83.5).
-*   **What ends up in the database:** `Expenses` table records `total_amount` = 3757.5, `original_currency` = 'USD', `exchange_rate` = 83.5.
-
-### 12. Missing Currency Format
-*   **Row number:** 125
-*   **What the problem is (exact raw CSV value):** Amount: `$120`
-*   **How your importer detects it:** Pre-parser detects non-numeric symbol `$`.
-*   **What policy you applied:** Auto-sanitized to extract `120`. Flagged for currency confirmation due to `$`. User confirmed it as USD and provided exchange rate.
-*   **What ends up in the database:** `Expenses` record normalized to INR using the provided exchange rate.
-
-### 13. Name Typo (Meera)
-*   **Row number:** 140
-*   **What the problem is (exact raw CSV value):** Payer: `Mira`
-*   **How your importer detects it:** Foreign key mapping failure. "Mira" does not exactly match any `Users.name` in the database.
-*   **What policy you applied:** Fuzzy matching flagged it and suggested `Meera`. User selected "Map to Meera".
-*   **What ends up in the database:** Foreign key in `Expenses.payer_id` correctly points to Meera's user ID.
-
-### 14. Name Typo (Dev)
-*   **Row number:** 142
-*   **What the problem is (exact raw CSV value):** Payer: `Devv`
-*   **How your importer detects it:** Foreign key mapping failure.
-*   **What policy you applied:** Fuzzy matching suggested `Dev`. User confirmed.
-*   **What ends up in the database:** Foreign key correctly points to Dev's ID.
-
-### 15. Missing Payer
-*   **Row number:** 150
-*   **What the problem is (exact raw CSV value):** Date: `2024-03-01`, Desc: `Netflix`, Payer: ` ` (Blank)
-*   **How your importer detects it:** Required field `Payer` evaluates to null/empty string during validation.
-*   **What policy you applied:** Hard Flag. User was forced to select a payer from a dropdown. User selected `Aisha`.
-*   **What ends up in the database:** `Expenses` record created with `payer_id` pointing to Aisha.
-
-### 16. Number Format Error (Commas)
-*   **Row number:** 165
-*   **What the problem is (exact raw CSV value):** Amount: `1,500.50`
-*   **How your importer detects it:** Float parsing fails due to the comma.
-*   **What policy you applied:** Auto-sanitization. The parser automatically strips `,` before attempting float conversion.
-*   **What ends up in the database:** `Expenses` table stores `1500.50` (Decimal).
-
-### 17. Number Format Error (Text)
-*   **Row number:** 170
-*   **What the problem is (exact raw CSV value):** Amount: `Rs. 500`
-*   **How your importer detects it:** Float parsing fails.
-*   **What policy you applied:** Auto-sanitization strips "Rs. ".
-*   **What ends up in the database:** `Expenses` table stores `500.00`.
-
-### 18. Future Date Typo
-*   **Row number:** 180
-*   **What the problem is (exact raw CSV value):** Date: `2025-02-14`
-*   **How your importer detects it:** Parsed date > `current_date`.
-*   **What policy you applied:** Flagged as anomaly. User corrected the typo in the UI to `2024-02-14`.
-*   **What ends up in the database:** `Expenses` table stores date `2024-02-14`.
-
-### 19. Invalid Date Format
-*   **Row number:** 185
-*   **What the problem is (exact raw CSV value):** Date: `14/02/2024`
-*   **How your importer detects it:** Does not match expected `YYYY-MM-DD` ISO format.
-*   **What policy you applied:** Date parser attempts fallback formats (DD/MM/YYYY). Successfully parsed. User visually confirmed the standard ISO conversion in the UI.
-*   **What ends up in the database:** Standardized Date `2024-02-14`.
-
-### 20. Empty/Junk Row
-*   **Row number:** 190
-*   **What the problem is (exact raw CSV value):** All columns empty except commas: `,,,,`
-*   **How your importer detects it:** Row contains no alphanumeric characters in critical fields (Date, Amount, Desc).
-*   **What policy you applied:** Auto-Ignored.
-*   **What ends up in the database:** Nothing. Completely discarded.
-
-### 21. Missing Description
-*   **Row number:** 200
-*   **What the problem is (exact raw CSV value):** Desc: ` ` (Blank), Amount: `100`
-*   **How your importer detects it:** Description field is null/empty.
-*   **What policy you applied:** Flagged as missing context. User opted to type in `Snacks` before approving.
-*   **What ends up in the database:** `Expenses` table stores description `Snacks`.
-
-### 22. Unknown Split Type String
-*   **Row number:** 210
-*   **What the problem is (exact raw CSV value):** Split Type: `Half-half`
-*   **How your importer detects it:** Does not match known enums ('EQUAL', 'EXACT', 'PERCENTAGE', 'SHARES').
-*   **What policy you applied:** Flagged. User mapped "Half-half" to the standard `EQUAL` split type policy.
-*   **What ends up in the database:** `ExpenseSplits` records are generated using the standard Equal division logic.
+### 22. Currency conversion missing
+*   **Row number:** 20,21,23,26
+*   **What the problem is:** USD amounts. The original sheet treats $1 = ₹1. That's wrong (Priya's complaint).
+*   **How your importer detects it:** `FOREIGN_CURRENCY` flags any non-INR row.
+*   **What policy you applied:** Auto-converts via `USD_TO_INR_RATE` env setting.
+*   **What ends up in the database:** `Expenses` table records `amount_inr` via exchange rate.
 
 ---
 
@@ -168,7 +168,7 @@ Our application relies on a strict relational model (PostgreSQL) to ensure ACID 
 - A **User** can belong to many **Groups**, and a **Group** has many **Users**. This many-to-many relationship is resolved by the `GroupMemberships` table.
 - A **Group** tracks many **Expenses** and **Settlements**.
 - An **Expense** is paid by one or more **Users**, and split among many **Users**. This is handled by the `ExpenseSplits` table.
-- The `ImportBatches` and `ImportAnomalies` tables sit adjacent to the core tables, acting as a staging area to hold parsed CSV rows until they are resolved by a human.
+- The `ImportRuns` and `ImportAnomalies` tables sit adjacent to the core tables, acting as a staging area to hold parsed CSV rows until they are resolved by a human.
 
 ### Tables & Relationships
 

@@ -1,43 +1,25 @@
-# AI Usage & Collaboration Log (AI_USAGE.md)
+# AI Usage Log (AI_USAGE.md)
 
-This document outlines how AI tools were utilized during the development of EquiSplit, key prompts used to guide the architecture, and critical instances where AI-generated output required human intervention, critical thinking, and correction.
-
-## AI Tools Used
-- **Primary Collaborator:** Antigravity (Google DeepMind) / LLM Coding Assistant
-- **Roles:** Project scaffolding, boilerplate generation, algorithm drafting, Tailwind CSS component creation, and initial database schema drafting.
+This document tracks the usage of AI tools during the development of EquiSplit, highlighting key prompts and documenting instances where the AI generated flawed code that required human intervention.
 
 ## Key Prompts Used
-1. *"Design a strict relational database schema (PostgreSQL) for a shared expenses app. It must handle multi-currency expenses with exchange rates, time-bound group memberships (users joining/leaving at specific dates), and include a staging area (`ImportBatches`, `ImportAnomalies`) for messy CSV data imports."*
-2. *"Write a debt simplification algorithm in Python that takes a list of bilateral debts (A owes B $10, B owes C $20) and returns the minimum number of transactions required to settle all balances. Handle floating-point precision issues carefully."*
-3. *"Generate a Next.js React component using Tailwind CSS for an 'Import Review Dashboard'. It needs to display a list of data anomalies (e.g., 'Negative Amount Detected') and provide the user with explicit dropdown options to select a resolution policy (Merge, Delete, Keep)."*
+- "Build the balance calculation algorithm (graph-based simplification) so it generates the minimum number of transactions."
+- "Write the anomaly detection service based on the 22 expected issues described in the assignment."
+- "Create an interactive CSV import pipeline that requires human approval for any deleted or modified rows."
 
----
+## Flawed Output & Human Corrections
 
-## AI Corrections & Human Oversight
+### 1. Hardcoded Split Parsing vs. CSV Format
+**The Error:** The AI implemented `INVALID_PERCENTAGES` detection by splitting the `split_details` string using a colon and a comma (e.g., `Aisha: 30, Rohan: 30`). 
+**How it was caught:** The human engineer read the actual `expenses_export.csv` file and noticed the format is `Aisha 30%; Rohan 30%; Priya 30%; Meera 20%`. 
+**The Fix:** Instructed the AI to read the CSV file. The AI updated the logic to use the regex `re.findall(r'(\d+(?:\.\d+)?)%', split_details_str)` to reliably extract the percentages regardless of the delimiter.
 
-As requested in the assignment, while the AI is a powerful accelerator, the human engineer remains responsible for every line of code. Here are three concrete cases where the AI produced incorrect, sub-optimal, or requirement-violating code, how it was caught, and how it was fixed.
+### 2. Missing Foreign Currency Flag
+**The Error:** The AI implemented a rule to default an empty currency field to `INR` and quietly convert `USD` behind the scenes using a `.env` setting without explicitly flagging the foreign currency to the user.
+**How it was caught:** The human engineer pointed out that "The original sheet treats $1 = ₹1. That's wrong (Priya's complaint)." We must explicitly flag the foreign currency anomaly so the user is forced to approve or provide an exchange rate rather than trusting a silent conversion.
+**The Fix:** The AI added a `FOREIGN_CURRENCY` enum to `AnomalyType` and modified `anomaly_detector.py` to throw an `ERROR` when `curr != "INR"`. The interactive resolution service was updated to correctly handle it.
 
-### Case 1: Silent Failures in Data Import (Violating Meera's Requirement)
-*   **The Error:** During the implementation of the CSV parsing logic, I asked the AI to handle invalid data types (e.g., a string in an amount column) and negative amounts. The AI generated code that used a `try-except` block to catch the `ValueError` and simply `continue` to the next row, silently dropping the bad data.
-*   **How I Caught It:** During manual code review of the `import_service.py` file, I noticed the silent `continue`. This directly violated the core assignment requirement ("A silent guess is a failing answer") and Meera's explicit request to approve anything the app deletes.
-*   **What I Changed:** I rejected the AI's logic and rewrote the ingestion loop. Instead of skipping rows, the parser now catches the error and creates an `ImportAnomaly` record in the database. This record preserves the raw JSON row data and flags the specific error type. This ensures the frontend can query these records and present them in the interactive dashboard for explicit user resolution.
-
-### Case 2: Flawed Time-Bound Membership Model (Violating Sam's Requirement)
-*   **The Error:** To satisfy Sam's requirement ("I moved in mid-April. Why would March electricity affect my balance?"), I asked the AI to update the database schema to handle dynamic group memberships. The AI added a simple `is_active` boolean column to the `GroupMemberships` table.
-*   **How I Caught It:** I realized during the architectural review that a boolean flag only reflects the *current* state of the user. If a user enters a historical expense from March, the system needs to know who was active *in March*, not who is active *today*. A boolean flag cannot answer temporal queries.
-*   **What I Changed:** I corrected the schema design manually. I removed the `is_active` boolean and replaced it with `joined_at` and `left_at` `Date` columns. I then updated the expense splitting logic to filter users based on whether the `expense.date` falls strictly between their specific `joined_at` and `left_at` bounds.
-
-### Case 3: Naive Debt Simplification (Violating Aisha's Requirement)
-*   **The Error:** When asked to implement the debt simplification algorithm ("one number per person"), the AI initially provided a naive greedy algorithm. While it worked for simple linear chains, it failed to identify and eliminate circular debts (e.g., A owes B $10, B owes C $10, C owes A $10).
-*   **How I Caught It:** I did not trust the AI's algorithm blindly. I wrote a suite of `pytest` unit tests specifically targeting edge cases in debt graphs, including circular dependencies. The AI's initial implementation returned three unnecessary transactions instead of simplifying the circular debt to zero.
-*   **What I Changed:** I discarded the naive approach. I guided the AI to implement a more robust algorithm (similar to the standard Splitwise algorithm) that first calculates the absolute net balances for every user, separates them into lists of net-debtors and net-creditors, and then matches the largest debtors with the largest creditors iteratively until all net balances are zero. This correctly passed all unit test edge cases.
-
-### Case 4: Environment Nuances and Package Dependencies
-*   **The Error:** I attempted to install `psycopg2-binary` on a Windows environment running a Python version without pre-built binary wheels. The installation failed because it required compiling from source, which in turn required `pg_config` from a full PostgreSQL installation that was not present in the environment's path.
-*   **How I Caught It:** The terminal threw a massive stack trace during the `pip install` phase.
-*   **What I Changed:** I adapted the strategy to rely on the standard synchronous database operations using `psycopg2` via the pre-existing environment setup, avoiding unnecessary async dependencies or compilation errors.
-
-### Case 5: Fuzzy String Matching False Positives
-*   **The Error:** When building the name normalizer (`app/utils/name_normalizer.py`), I needed a "starts with" fuzzy match so that `"Priya S"` would resolve to `"Priya"`. A naive `.startswith("Priya")` approach would incorrectly match strings like `"Priyas"` or `"Dev's friend Kabir"` (to `"Dev"`).
-*   **How I Caught It:** Through explicit test case design based on the CSV anomalies provided in the project prompt. I noted that `"Dev's friend Kabir"` was meant to be flagged as an entirely unknown participant, not a fuzzy match for `"Dev"`.
-*   **What I Changed:** I implemented a strict word-boundary check by appending a space to the normalized known name: `.startswith(k_norm + " ")`. This ensures `"Priya S".startswith("Priya ")` succeeds, while `"Dev'S Friend Kabir".startswith("Dev ")` accurately fails, preserving Meera's anomaly constraints.
+### 3. Missing `base_currency` in SQLAlchemy Group Model vs. Pytest
+**The Error:** The AI created a test suite (`test_import.py`) that attempted to construct a `Group` using `Group(name="Trip", base_currency="INR")`. However, the `base_currency` column had been previously removed from the final `Group` schema in favor of storing currency exclusively on the `Expense` and `Settlement` tables.
+**How it was caught:** The human engineer told the AI to run the tests. Pytest failed with `TypeError: 'base_currency' is an invalid keyword argument for Group`.
+**The Fix:** The AI reviewed `group.py` and modified the test to correctly instantiate the group using `created_by` instead of `base_currency`.

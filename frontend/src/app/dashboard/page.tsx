@@ -5,15 +5,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import api from "@/lib/api";
+import TopNav from "@/components/TopNav";
 import {
   Plus,
   Users,
-  LogOut,
   Loader2,
   ChevronRight,
   X,
-  CreditCard,
-  PieChart
 } from "lucide-react";
 
 interface Group {
@@ -73,28 +71,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-[#f4f5f6]">
-      {/* ── Top Navigation Bar ── */}
-      <nav className="bg-[#5bc5a7] text-white shadow-md">
-        <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded bg-white text-[#5bc5a7] flex items-center justify-center">
-              <PieChart size={20} />
-            </div>
-            <span className="text-xl font-bold tracking-tight">EquiSplit</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-[#489d85] flex items-center justify-center border-2 border-[#fff]">
-                <span className="font-bold text-sm">{user.name.charAt(0).toUpperCase()}</span>
-              </div>
-              <span className="text-sm font-medium hidden sm:block">{user.name}</span>
-            </div>
-            <button onClick={logout} className="text-white/80 hover:text-white transition-colors" title="Logout">
-              <LogOut size={18} />
-            </button>
-          </div>
-        </div>
-      </nav>
+      <TopNav />
 
       {/* ── Main Content Area ── */}
       <div className="max-w-5xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -148,7 +125,7 @@ export default function DashboardPage() {
                   <Link
                     key={group.id}
                     href={`/dashboard/${group.id}`}
-                    className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors animate-fade-in group block"
+                    className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors animate-fade-in group"
                     style={{ animationDelay: `${0.03 * i}s`, opacity: 0 }}
                   >
                     <div className="flex items-center gap-4">

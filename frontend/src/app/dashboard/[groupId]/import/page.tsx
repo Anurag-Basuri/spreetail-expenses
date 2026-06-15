@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import api from "@/lib/api";
 import { formatINR } from "@/lib/utils";
+import TopNav from "@/components/TopNav";
 import {
   ArrowLeft,
   Upload,
@@ -170,17 +171,21 @@ export default function ImportPage() {
   }
 
   return (
-    <div className="min-h-screen">
-      {/* ── Nav ── */}
-      <nav className="flex items-center gap-4 px-6 py-4 border-b border-border">
-        <Link href={`/dashboard/${groupId}`} className="text-muted hover:text-foreground transition">
-          <ArrowLeft size={20} />
-        </Link>
-        <div>
-          <h1 className="text-lg font-bold">Smart CSV Importer</h1>
-          <p className="text-xs text-muted">Upload, detect anomalies, review & import</p>
+    <div className="min-h-screen bg-[#f4f5f6]">
+      <TopNav />
+
+      {/* ── Sub Navigation ── */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center gap-4">
+          <Link href={`/dashboard/${groupId}`} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:text-gray-800 transition-colors">
+            <ArrowLeft size={18} />
+          </Link>
+          <div>
+            <h1 className="text-xl font-bold text-gray-800">Smart CSV Importer</h1>
+            <p className="text-sm text-gray-500">Upload, detect anomalies, review & import</p>
+          </div>
         </div>
-      </nav>
+      </div>
 
       <div className="max-w-6xl mx-auto px-6 py-8">
         {/* ── Step Indicator ── */}
@@ -204,29 +209,29 @@ export default function ImportPage() {
         {/* ── STEP 1: UPLOAD ── */}
         {/* ══════════════════════════════════════ */}
         {step === "upload" && (
-          <div className="animate-fade-in">
+          <div className="animate-fade-in max-w-2xl mx-auto">
             <div
               onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}
-              className={`glass p-12 text-center border-2 border-dashed transition-colors cursor-pointer ${dragActive ? "border-primary bg-primary/5" : "border-border hover:border-muted"}`}
+              className={`bg-white rounded-xl shadow-sm p-12 text-center border-2 border-dashed transition-colors cursor-pointer ${dragActive ? "border-[#5bc5a7] bg-[#5bc5a7]/5" : "border-gray-300 hover:border-[#5bc5a7]/50"}`}
               onClick={() => document.getElementById("csv-file-input")?.click()}
             >
               <input id="csv-file-input" type="file" accept=".csv" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) setFile(f); }} />
-              <FileSpreadsheet size={48} className={`mx-auto mb-4 ${dragActive ? "text-primary" : "text-muted"}`} />
+              <FileSpreadsheet size={48} className={`mx-auto mb-4 ${dragActive ? "text-[#5bc5a7]" : "text-gray-300"}`} />
               {file ? (
                 <>
-                  <p className="font-semibold text-lg">{file.name}</p>
-                  <p className="text-sm text-muted mt-1">{(file.size / 1024).toFixed(1)} KB — Ready to import</p>
+                  <p className="font-bold text-lg text-gray-800">{file.name}</p>
+                  <p className="text-sm text-gray-500 mt-1 font-medium">{(file.size / 1024).toFixed(1)} KB — Ready to import</p>
                 </>
               ) : (
                 <>
-                  <p className="font-semibold text-lg">Drop your CSV file here</p>
-                  <p className="text-sm text-muted mt-1">or click to browse. Accepts .csv files only.</p>
+                  <p className="font-bold text-lg text-gray-800">Drop your CSV file here</p>
+                  <p className="text-sm text-gray-500 mt-1 font-medium">or click to browse. Accepts .csv files only.</p>
                 </>
               )}
             </div>
             {file && (
               <div className="mt-6 flex justify-center">
-                <button onClick={handleUpload} className="btn-primary text-base px-8 py-3">
+                <button onClick={handleUpload} className="btn-primary text-base px-8 py-3 shadow-lg">
                   <Upload size={18} /> Start Import
                 </button>
               </div>
@@ -238,10 +243,10 @@ export default function ImportPage() {
         {/* ── STEP 2: PROCESSING ── */}
         {/* ══════════════════════════════════════ */}
         {step === "processing" && (
-          <div className="glass p-12 text-center animate-fade-in">
-            <Loader2 size={48} className="mx-auto mb-4 text-primary animate-spin" />
-            <h2 className="text-xl font-bold mb-2">Analyzing your CSV…</h2>
-            <p className="text-muted text-sm">Running 22 anomaly detection rules across every row. This usually takes a few seconds.</p>
+          <div className="bg-white rounded-xl shadow-sm p-16 text-center animate-fade-in max-w-2xl mx-auto border border-gray-200">
+            <Loader2 size={48} className="mx-auto mb-6 text-[#5bc5a7] animate-spin" />
+            <h2 className="text-2xl font-bold mb-2 text-gray-800">Analyzing your CSV…</h2>
+            <p className="text-gray-500 font-medium">Running 22 anomaly detection rules across every row. This usually takes a few seconds.</p>
           </div>
         )}
 
@@ -252,21 +257,21 @@ export default function ImportPage() {
           <div className="animate-fade-in space-y-6">
             {/* ── Summary Cards ── */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="glass-sm p-4 text-center">
-                <p className="text-3xl font-bold text-success">{report.imported}</p>
-                <p className="text-xs text-muted mt-1">✅ Imported</p>
+              <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 text-center">
+                <p className="text-3xl font-bold text-[#5bc5a7]">{report.imported}</p>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mt-2">Imported</p>
               </div>
-              <div className="glass-sm p-4 text-center">
-                <p className="text-3xl font-bold text-danger">{report.flagged}</p>
-                <p className="text-xs text-muted mt-1">⚠️ Flagged</p>
+              <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 text-center">
+                <p className="text-3xl font-bold text-[#ff652f]">{report.flagged}</p>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mt-2">Flagged</p>
               </div>
-              <div className="glass-sm p-4 text-center">
-                <p className="text-3xl font-bold text-muted">{report.skipped}</p>
-                <p className="text-xs text-muted mt-1">❌ Skipped</p>
+              <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 text-center">
+                <p className="text-3xl font-bold text-gray-400">{report.skipped}</p>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mt-2">Skipped</p>
               </div>
-              <div className="glass-sm p-4 text-center">
-                <p className="text-3xl font-bold text-warning">{report.auto_fixed}</p>
-                <p className="text-xs text-muted mt-1">🔧 Auto-Fixed</p>
+              <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 text-center">
+                <p className="text-3xl font-bold text-[#f59e0b]">{report.auto_fixed}</p>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mt-2">Auto-Fixed</p>
               </div>
             </div>
 
@@ -290,28 +295,28 @@ export default function ImportPage() {
             {/* ── Flagged Items Requiring Human Approval ── */}
             {unresolvedFlagged.length > 0 && (
               <div>
-                <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
-                  <AlertTriangle size={20} className="text-danger" />
-                  Flagged for Review — {unresolvedFlagged.length} item{unresolvedFlagged.length !== 1 ? "s" : ""} need your approval
+                <h2 className="text-lg font-bold mb-3 flex items-center gap-2 text-gray-800">
+                  <AlertTriangle size={20} className="text-[#ff652f]" />
+                  Flagged for Review
                 </h2>
-                <p className="text-sm text-muted mb-4">
-                  Meera&apos;s rule: &quot;I want to approve anything the app deletes or changes.&quot;
+                <p className="text-sm text-gray-500 font-medium mb-4">
+                  {unresolvedFlagged.length} item{unresolvedFlagged.length !== 1 ? "s" : ""} need your approval. Meera&apos;s rule: &quot;I want to approve anything the app deletes or changes.&quot;
                 </p>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {unresolvedFlagged.map((anomaly) => (
-                    <div key={anomaly.id} className="glass p-4 border-l-4 border-danger">
-                      <div className="flex items-center justify-between mb-2">
+                    <div key={anomaly.id} className="bg-white p-5 rounded-lg border border-gray-200 border-l-4 border-l-[#ff652f] shadow-sm">
+                      <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
-                          <XCircle size={16} className="text-danger" />
+                          <XCircle size={16} className="text-[#ff652f]" />
                           <span className="badge badge-error">{anomaly.severity}</span>
-                          <span className="text-sm font-mono text-muted">Row {anomaly.row_number}</span>
-                          <span className="text-xs font-mono text-muted bg-surface px-2 py-0.5 rounded">{anomaly.anomaly_type}</span>
+                          <span className="text-xs font-mono font-bold text-gray-500">Row {anomaly.row_number}</span>
+                          <span className="text-xs font-mono font-bold text-gray-500 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">{anomaly.anomaly_type}</span>
                         </div>
                       </div>
-                      <p className="text-sm mb-2">{anomaly.description}</p>
-                      <div className="glass-sm p-3 mb-3 text-xs">
-                        <p className="text-muted mb-1 font-semibold">Suggested Action</p>
-                        <p>{anomaly.suggested_action}</p>
+                      <p className="text-sm font-medium text-gray-800 mb-3">{anomaly.description}</p>
+                      <div className="bg-gray-50 border border-gray-100 rounded p-3 mb-4 text-xs">
+                        <p className="text-gray-500 mb-1 font-bold uppercase tracking-wider">Suggested Action</p>
+                        <p className="font-medium text-gray-700">{anomaly.suggested_action}</p>
                       </div>
 
                       {/* Optional note / corrected value input */}
@@ -351,12 +356,12 @@ export default function ImportPage() {
 
             {/* ── Full Anomaly Table ── */}
             <div>
-              <h2 className="text-lg font-bold mb-3">All Detected Anomalies</h2>
-              <div className="glass overflow-hidden">
+              <h2 className="text-lg font-bold mb-3 text-gray-800">All Detected Anomalies</h2>
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-border text-left text-xs text-muted uppercase tracking-wider">
+                      <tr className="bg-gray-50 border-b border-gray-200 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                         <th className="px-4 py-3 w-16">Row</th>
                         <th className="px-4 py-3">Type</th>
                         <th className="px-4 py-3">Issue</th>
@@ -371,33 +376,33 @@ export default function ImportPage() {
                         const isExpanded = expandedRow === a.id;
                         return (
                           <>
-                            <tr key={a.id} className="border-b border-border/50 hover:bg-surface-hover/30 transition-colors">
-                              <td className="px-4 py-3 font-mono tabular-nums">{a.row_number}</td>
+                            <tr key={a.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                              <td className="px-4 py-3 font-mono font-bold text-gray-500 tabular-nums">{a.row_number}</td>
                               <td className="px-4 py-3">
                                 <div className="flex items-center gap-2">
                                   {getSeverityIcon(a.severity)}
-                                  <span className={`font-mono text-xs ${getSeverityClass(a.severity)}`}>{a.anomaly_type}</span>
+                                  <span className={`font-mono text-xs font-bold ${getSeverityClass(a.severity)}`}>{a.anomaly_type}</span>
                                 </div>
                               </td>
-                              <td className="px-4 py-3 max-w-xs truncate">{a.description}</td>
-                              <td className="px-4 py-3 text-xs text-muted max-w-xs truncate">{a.suggested_action}</td>
+                              <td className="px-4 py-3 max-w-xs truncate font-medium text-gray-800">{a.description}</td>
+                              <td className="px-4 py-3 text-xs text-gray-500 max-w-xs truncate">{a.suggested_action}</td>
                               <td className="px-4 py-3">
                                 <span className={`badge ${status.cls}`}>{status.text}</span>
                               </td>
                               <td className="px-4 py-3">
-                                <button onClick={() => setExpandedRow(isExpanded ? null : a.id)} className="text-muted hover:text-foreground">
+                                <button onClick={() => setExpandedRow(isExpanded ? null : a.id)} className="text-gray-400 hover:text-gray-600">
                                   {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                                 </button>
                               </td>
                             </tr>
                             {isExpanded && (
-                              <tr key={`${a.id}-detail`} className="bg-surface/30">
-                                <td colSpan={6} className="px-4 py-3">
-                                  <div className="text-xs space-y-1">
-                                    <p><span className="text-muted font-semibold">Severity:</span> <span className={getSeverityClass(a.severity)}>{a.severity}</span></p>
-                                    <p><span className="text-muted font-semibold">Full Description:</span> {a.description}</p>
-                                    <p><span className="text-muted font-semibold">Suggested Action:</span> {a.suggested_action}</p>
-                                    <p><span className="text-muted font-semibold">Auto-Resolved:</span> {a.auto_resolved ? "Yes" : "No"}</p>
+                              <tr key={`${a.id}-detail`} className="bg-gray-50 border-b border-gray-200">
+                                <td colSpan={6} className="px-4 py-4">
+                                  <div className="text-xs space-y-2">
+                                    <p><span className="text-gray-500 font-bold uppercase tracking-wider">Severity:</span> <span className={`${getSeverityClass(a.severity)} font-bold ml-2`}>{a.severity}</span></p>
+                                    <p><span className="text-gray-500 font-bold uppercase tracking-wider">Full Description:</span> <span className="font-medium text-gray-800 ml-2">{a.description}</span></p>
+                                    <p><span className="text-gray-500 font-bold uppercase tracking-wider">Suggested Action:</span> <span className="font-medium text-gray-800 ml-2">{a.suggested_action}</span></p>
+                                    <p><span className="text-gray-500 font-bold uppercase tracking-wider">Auto-Resolved:</span> <span className="font-medium text-gray-800 ml-2">{a.auto_resolved ? "Yes" : "No"}</span></p>
                                   </div>
                                 </td>
                               </tr>
@@ -417,27 +422,27 @@ export default function ImportPage() {
         {/* ── STEP 4: DONE ── */}
         {/* ══════════════════════════════════════ */}
         {step === "done" && report && (
-          <div className="glass p-10 text-center animate-slide-up">
-            <CheckCircle2 size={56} className="mx-auto mb-4 text-success" />
-            <h2 className="text-2xl font-bold mb-2">Import Complete!</h2>
-            <p className="text-muted mb-8">Your data has been successfully processed and imported into the database.</p>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-16 text-center animate-slide-up max-w-2xl mx-auto">
+            <CheckCircle2 size={56} className="mx-auto mb-4 text-[#5bc5a7]" />
+            <h2 className="text-2xl font-bold mb-2 text-gray-800">Import Complete!</h2>
+            <p className="text-gray-500 mb-8 font-medium">Your data has been successfully processed and imported into the database.</p>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-              <div className="glass-sm p-4 text-center">
-                <p className="text-2xl font-bold">{report.total_rows}</p>
-                <p className="text-xs text-muted">Total Rows</p>
+              <div className="bg-gray-50 rounded-lg p-4 text-center border border-gray-100">
+                <p className="text-2xl font-bold text-gray-800">{report.total_rows}</p>
+                <p className="text-xs text-gray-500 font-bold uppercase mt-1">Total Rows</p>
               </div>
-              <div className="glass-sm p-4 text-center">
-                <p className="text-2xl font-bold text-success">{report.imported}</p>
-                <p className="text-xs text-muted">✅ Imported</p>
+              <div className="bg-[#5bc5a7]/10 rounded-lg p-4 text-center border border-[#5bc5a7]/20">
+                <p className="text-2xl font-bold text-[#5bc5a7]">{report.imported}</p>
+                <p className="text-xs text-gray-500 font-bold uppercase mt-1">Imported</p>
               </div>
-              <div className="glass-sm p-4 text-center">
-                <p className="text-2xl font-bold text-warning">{report.auto_fixed}</p>
-                <p className="text-xs text-muted">🔧 Auto-Fixed</p>
+              <div className="bg-[#f59e0b]/10 rounded-lg p-4 text-center border border-[#f59e0b]/20">
+                <p className="text-2xl font-bold text-[#f59e0b]">{report.auto_fixed}</p>
+                <p className="text-xs text-gray-500 font-bold uppercase mt-1">Auto-Fixed</p>
               </div>
-              <div className="glass-sm p-4 text-center">
-                <p className="text-2xl font-bold text-danger">{report.skipped}</p>
-                <p className="text-xs text-muted">❌ Skipped</p>
+              <div className="bg-gray-100 rounded-lg p-4 text-center border border-gray-200">
+                <p className="text-2xl font-bold text-gray-400">{report.skipped}</p>
+                <p className="text-xs text-gray-500 font-bold uppercase mt-1">Skipped</p>
               </div>
             </div>
 

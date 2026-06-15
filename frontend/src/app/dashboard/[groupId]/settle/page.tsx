@@ -5,6 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import api from "@/lib/api";
+import { formatINR } from "@/lib/utils";
+import TopNav from "@/components/TopNav";
 import {
   ArrowLeft,
   ArrowRightLeft,
@@ -107,34 +109,36 @@ export default function SettlePage() {
     ) || [];
 
   return (
-    <div className="min-h-screen">
-      <nav className="flex items-center gap-4 px-6 py-4 border-b border-border">
-        <Link
-          href={`/dashboard/${groupId}`}
-          className="text-muted hover:text-foreground transition"
-        >
-          <ArrowLeft size={20} />
-        </Link>
-        <div>
-          <h1 className="text-lg font-bold">Settle Up</h1>
-          <p className="text-xs text-muted">{group?.name} — Record a payment</p>
+    <div className="min-h-screen bg-[#f4f5f6]">
+      <TopNav />
+
+      {/* ── Sub Navigation ── */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-2xl mx-auto px-6 py-4 flex items-center gap-4">
+          <Link href={`/dashboard/${groupId}`} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:text-gray-800 transition-colors">
+            <ArrowLeft size={18} />
+          </Link>
+          <div>
+            <h1 className="text-xl font-bold text-gray-800">Settle Up</h1>
+            <p className="text-sm text-gray-500">{group?.name} — Record a payment</p>
+          </div>
         </div>
-      </nav>
+      </div>
 
       <div className="max-w-2xl mx-auto px-6 py-8">
         {/* ── Settlement Form ── */}
-        <div className="glass p-6 mb-8 animate-fade-in">
-          <h2 className="text-lg font-bold mb-4">Record a Payment</h2>
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8 animate-fade-in">
+          <h2 className="text-lg font-bold mb-4 text-gray-800">Record a Payment</h2>
 
           {success && (
-            <div className="mb-4 p-3 rounded-lg bg-success/10 border border-success/30 text-success text-sm flex items-center gap-2">
+            <div className="mb-4 p-3 rounded-lg bg-[#5bc5a7]/10 border border-[#5bc5a7]/30 text-[#489d85] text-sm flex items-center gap-2 font-medium">
               <CheckCircle2 size={16} /> Settlement recorded successfully!
             </div>
           )}
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-muted mb-1.5">
+              <label className="block text-sm font-bold text-gray-700 mb-1.5">
                 Paid to
               </label>
               <select
@@ -151,53 +155,27 @@ export default function SettlePage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-muted mb-1.5">
+              <label className="block text-sm font-bold text-gray-700 mb-1.5">
                 Amount (₹)
               </label>
-              <input
-                type="number"
-                className="input"
-                placeholder="0.00"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                min="0.01"
-                step="0.01"
-              />
+              <input type="number" className="input" placeholder="0.00" value={amount} onChange={(e) => setAmount(e.target.value)} min="0.01" step="0.01" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-muted mb-1.5">
+              <label className="block text-sm font-bold text-gray-700 mb-1.5">
                 Date
               </label>
               <div className="relative">
-                <input
-                  type="date"
-                  className="input"
-                  value={settledAt}
-                  onChange={(e) => setSettledAt(e.target.value)}
-                />
-                <Calendar
-                  size={16}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none"
-                />
+                <input type="date" className="input" value={settledAt} onChange={(e) => setSettledAt(e.target.value)} />
+                <Calendar size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-muted mb-1.5">
+              <label className="block text-sm font-bold text-gray-700 mb-1.5">
                 Note (optional)
               </label>
-              <input
-                type="text"
-                className="input"
-                placeholder="e.g. UPI transfer"
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-              />
+              <input type="text" className="input" placeholder="e.g. UPI transfer" value={note} onChange={(e) => setNote(e.target.value)} />
             </div>
-            <button
-              onClick={handleSubmit}
-              className="btn-primary w-full"
-              disabled={submitting || !paidTo || !amount}
-            >
+            <button onClick={handleSubmit} className="btn-primary w-full bg-[#ff652f] hover:bg-[#e55a2a] shadow-none" disabled={submitting || !paidTo || !amount}>
               {submitting ? (
                 <Loader2 size={16} className="animate-spin" />
               ) : (
@@ -210,37 +188,27 @@ export default function SettlePage() {
 
         {/* ── Settlement History ── */}
         <div>
-          <h2 className="text-lg font-bold mb-4">Settlement History</h2>
+          <h2 className="text-lg font-bold mb-4 text-gray-800">Settlement History</h2>
           {settlements.length === 0 ? (
-            <div className="glass-sm p-8 text-center">
-              <ArrowRightLeft size={36} className="mx-auto text-muted mb-3" />
-              <p className="text-muted text-sm">No settlements recorded yet.</p>
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+              <ArrowRightLeft size={36} className="mx-auto text-gray-300 mb-3" />
+              <p className="text-gray-500 text-sm">No settlements recorded yet.</p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden divide-y divide-gray-100">
               {settlements.map((s, i) => (
-                <div
-                  key={s.id}
-                  className="glass-sm p-4 flex items-center justify-between animate-fade-in"
-                  style={{ animationDelay: `${0.03 * i}s`, opacity: 0 }}
-                >
+                <div key={s.id} className="p-4 flex items-center justify-between animate-fade-in hover:bg-gray-50 transition-colors" style={{ animationDelay: `${0.03 * i}s`, opacity: 0 }}>
                   <div>
-                    <p className="font-medium text-sm">
-                      {s.paid_by_name}{" "}
-                      <span className="text-muted">paid</span>{" "}
-                      {s.paid_to_name}
+                    <p className="font-semibold text-sm text-gray-800">
+                      {s.paid_by_name} <span className="text-gray-500 font-normal">paid</span> {s.paid_to_name}
                     </p>
-                    <p className="text-xs text-muted mt-0.5">
-                      {new Date(s.settled_at).toLocaleDateString("en-IN", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                      })}
+                    <p className="text-xs text-gray-500 font-medium mt-0.5">
+                      {new Date(s.settled_at).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
                       {s.note && ` · ${s.note}`}
                     </p>
                   </div>
-                  <span className="font-bold text-success tabular-nums">
-                    ₹{parseFloat(s.amount).toLocaleString("en-IN")}
+                  <span className="font-bold text-[#5bc5a7] tabular-nums text-lg">
+                    {formatINR(s.amount)}
                   </span>
                 </div>
               ))}

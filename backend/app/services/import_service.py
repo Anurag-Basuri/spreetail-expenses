@@ -220,7 +220,7 @@ def get_import_report(db: Session, run_id: str) -> dict | None:
     for a in anomalies:
         # Reconstruct severity based on anomaly type
         sev = "INFO"
-        if a.anomaly_type in ["DUPLICATE", "MISSING_PAYER", "UNKNOWN_PARTICIPANT", "UNPARSEABLE_DATE", "ZERO_AMOUNT", "NEGATIVE_AMOUNT", "INVALID_PERCENTAGES", "INACTIVE_MEMBER"]:
+        if a.anomaly_type in ["DUPLICATE", "MISSING_PAYER", "UNKNOWN_PARTICIPANT", "UNPARSEABLE_DATE", "ZERO_AMOUNT", "NEGATIVE_AMOUNT", "INVALID_PERCENTAGES", "INACTIVE_MEMBER", "FOREIGN_CURRENCY"]:
             sev = "ERROR"
         elif a.anomaly_type in ["NEAR_DUPLICATE", "MISSING_CURRENCY", "MISSING_SPLIT_TYPE", "SETTLEMENT_AS_EXPENSE", "AMBIGUOUS_DATE", "NAME_INCONSISTENCY", "SPLIT_TYPE_CONFLICT", "EXCESS_DECIMALS"]:
             sev = "WARNING"

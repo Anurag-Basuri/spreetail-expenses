@@ -27,6 +27,7 @@ class AnomalyType(str, Enum):
     SPLIT_TYPE_CONFLICT = "SPLIT_TYPE_CONFLICT"
     WHITESPACE_IN_AMOUNT = "WHITESPACE_IN_AMOUNT"
     EXCESS_DECIMALS = "EXCESS_DECIMALS"
+    FOREIGN_CURRENCY = "FOREIGN_CURRENCY"
 
 @dataclass
 class Anomaly:
@@ -107,12 +108,17 @@ def detect_anomalies(
                 f"Payer '{paid_by_str}' is not a known member.", paid_by_str, "FLAGGED: Assign to known member or add member"
             ))
 
-    # 6. MISSING_CURRENCY
-    curr = row.get('currency', '').strip()
+    # 6. MISSING_CURRENCY or FOREIGN_CURRENCY
+    curr = row.get('currency', '').strip().upper()
     if not curr:
         anomalies.append(Anomaly(
             row_number, AnomalyType.MISSING_CURRENCY, "WARNING",
             "Currency is missing.", "", "AUTO_FIXED: Defaulted to INR", True, "INR"
+        ))
+    elif curr != "INR":
+        anomalies.append(Anomaly(
+            row_number, AnomalyType.FOREIGN_CURRENCY, "ERROR",
+            f"Currency is {curr}, which requires an exchange rate.", curr, "FLAGGED: Provide exchange rate to base currency"
         ))
         
     # 7. UNPARSEABLE_DATE / AMBIGUOUS_DATE
@@ -214,12 +220,15 @@ def detect_anomalies(
     split_details_str = row.get('split_details', '')
     if split_type == 'percentage' and split_details_str:
         try:
-            total_pct = sum([Decimal(p.split(':')[1].strip()) for p in split_details_str.split(',') if ':' in p])
-            if abs(total_pct - Decimal("100")) > Decimal("0.01"):
-                anomalies.append(Anomaly(
-                    row_number, AnomalyType.INVALID_PERCENTAGES, "ERROR",
-                    f"Percentages sum to {total_pct}, not 100.", split_details_str, "FLAGGED: Adjust percentages"
-                ))
+            # Extract all percentages using regex (e.g. "Aisha 30%; Rohan 30%")
+            percentages = re.findall(r'(\d+(?:\.\d+)?)%', split_details_str)
+            if percentages:
+                total_pct = sum([Decimal(p) for p in percentages])
+                if abs(total_pct - Decimal("100")) > Decimal("0.01"):
+                    anomalies.append(Anomaly(
+                        row_number, AnomalyType.INVALID_PERCENTAGES, "ERROR",
+                        f"Percentages sum to {total_pct}, not 100.", split_details_str, "FLAGGED: Adjust percentages"
+                    ))
         except Exception:
             pass
 

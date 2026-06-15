@@ -8,14 +8,8 @@ import {
   useCallback,
   ReactNode,
 } from "react";
-import api from "@/lib/api";
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  created_at: string;
-}
+import { api } from "@/lib/api";
+import { User } from "@/lib/types";
 
 interface AuthContextType {
   user: User | null;
@@ -32,16 +26,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   const fetchUser = useCallback(async () => {
-    const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem("token");
     if (!token) {
       setLoading(false);
       return;
     }
     try {
-      const res = await api.get("/auth/me");
-      setUser(res.data);
+      const user = await api.auth.me();
+      setUser(user);
     } catch {
-      localStorage.removeItem("access_token");
+      localStorage.removeItem("token");
       setUser(null);
     } finally {
       setLoading(false);
@@ -53,19 +47,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [fetchUser]);
 
   const login = async (email: string, password: string) => {
-    const res = await api.post("/auth/login", { email, password });
-    localStorage.setItem("access_token", res.data.access_token);
+    const res = await api.auth.login(email, password);
+    localStorage.setItem("token", res.access_token);
     await fetchUser();
   };
 
   const register = async (name: string, email: string, password: string) => {
-    const res = await api.post("/auth/register", { name, email, password });
-    localStorage.setItem("access_token", res.data.access_token);
+    const res = await api.auth.register(name, email, password);
+    localStorage.setItem("token", res.access_token);
     await fetchUser();
   };
 
   const logout = () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem("token");
     setUser(null);
   };
 

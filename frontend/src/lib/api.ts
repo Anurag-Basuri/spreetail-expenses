@@ -32,9 +32,8 @@ async function request<T>(
 // Ensure types are imported or defined (will add properly via types.ts)
 import { 
   User, Group, GroupDetail, Member, Expense, ExpenseCreate, 
-  BalanceSummary, MemberBalance, Settlement, SettlementCreate, ImportReport 
+  BalanceSummary, MemberBalance, Settlement, SettlementCreate, ImportReport, Token
 } from "./types";
-import { Token } from "@/context/AuthContext"; // or types
 
 // Auth
 export const api = {
@@ -48,7 +47,7 @@ export const api = {
   
   groups: {
     list:          () => request<Group[]>("/api/groups"),
-    create:        (name: string) => request<Group>("/api/groups", { method:"POST", body: JSON.stringify({name}) }),
+    create:        (data: {name: string, description?: string}) => request<Group>("/api/groups", { method:"POST", body: JSON.stringify(data) }),
     detail:        (id: number) => request<GroupDetail>(`/api/groups/${id}`),
     addMember:     (groupId: number, userId: number, joinedAt: string) =>
       request(`/api/groups/${groupId}/members`, { method:"POST", body: JSON.stringify({user_id: userId, joined_at: joinedAt}) }),

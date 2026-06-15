@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import api from "@/lib/api";
+import { formatINR } from "@/lib/utils";
 import {
   ArrowLeft,
   Loader2,
@@ -150,12 +151,11 @@ export default function ExpensesPage() {
                 </div>
                 <div className="text-right">
                   <p className="font-bold tabular-nums">
-                    {exp.currency === "INR" ? "₹" : "$"}
-                    {parseFloat(exp.amount).toLocaleString("en-IN")}
+                    {exp.currency === "INR" ? formatINR(exp.amount) : `$${parseFloat(exp.amount).toLocaleString("en-US")}`}
                   </p>
                   {exp.currency !== "INR" && (
                     <p className="text-xs text-muted tabular-nums">
-                      ₹{parseFloat(exp.amount_inr).toLocaleString("en-IN")}
+                      {formatINR(exp.amount_inr)}
                     </p>
                   )}
                 </div>
@@ -189,8 +189,7 @@ export default function ExpensesPage() {
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted">Amount</span>
                 <span className="font-bold text-lg tabular-nums">
-                  {selectedExpense.currency === "INR" ? "₹" : "$"}
-                  {parseFloat(selectedExpense.amount).toLocaleString("en-IN")}
+                  {selectedExpense.currency === "INR" ? formatINR(selectedExpense.amount) : `$${parseFloat(selectedExpense.amount).toLocaleString("en-US")}`}
                 </span>
               </div>
               {selectedExpense.currency !== "INR" && (
@@ -200,10 +199,7 @@ export default function ExpensesPage() {
                       Amount (INR)
                     </span>
                     <span className="font-medium tabular-nums">
-                      ₹
-                      {parseFloat(
-                        selectedExpense.amount_inr
-                      ).toLocaleString("en-IN")}
+                      {formatINR(selectedExpense.amount_inr)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
@@ -250,10 +246,7 @@ export default function ExpensesPage() {
                     >
                       <span>{getMemberName(split.user_id)}</span>
                       <span className="font-medium tabular-nums">
-                        ₹
-                        {parseFloat(split.amount_owed).toLocaleString(
-                          "en-IN"
-                        )}
+                        {formatINR(split.amount_owed)}
                       </span>
                     </div>
                   ))}

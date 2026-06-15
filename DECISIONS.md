@@ -77,3 +77,11 @@ This document records the significant architectural and product decisions made d
 
 *   **Decision:** Implement `is_deleted` on the `Expense` model.
 *   **Rationale:** Users need to be able to "delete" expenses from the UI without permanently destroying the audit log required by Rohan. A soft delete retains the historical record while excluding it from the `balance_service` simplification logic.
+
+## 11. Storing Import Summary Metrics
+
+*   **Decision:** Create a dedicated `ImportRun` model/table.
+*   **Options Considered:**
+    *   *Calculate on the fly:* Query all `ImportAnomaly` records for a run ID and infer the total rows/imported count. (Rejected: Rows that are perfectly clean are not stored as anomalies, making it impossible to reconstruct `total_rows` and `imported_count`).
+    *   *Dedicated `ImportRun` model:* Create a parent record for the import batch to store `total_rows`, `imported`, `flagged`, `skipped`, and `auto_fixed` counters.
+*   **Rationale:** We need to persist the summary of each file uploaded to serve the `get_import_report` API. Since clean records bypass the anomaly log entirely, adding the `ImportRun` table is the most robust way to aggregate metrics and link related anomalies via a foreign key.

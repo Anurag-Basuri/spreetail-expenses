@@ -178,7 +178,7 @@ Our application relies on a strict relational model (PostgreSQL) to ensure ACID 
 
 #### 2. `Groups`
 *   **Why it exists:** To isolate expenses and settlements. A user might have a group with flatmates and another for a specific trip. Debt simplification only runs *within* a group context.
-*   **Schema:** `id` (PK), `name` (String), `base_currency` (String, default 'INR').
+*   **Schema:** `id` (PK), `name` (String), `created_by` (FK -> Users).
 
 #### 3. `GroupMemberships`
 *   **Why it exists:** Resolves the Many-to-Many between Users and Groups. **Crucially**, it contains `joined_at` and `left_at` date columns. This directly solves Sam and Meera's temporal requirements. A simple `is_active` boolean on the User table would not allow us to historically reconstruct who was supposed to pay for a bill from 3 months ago.
@@ -186,7 +186,7 @@ Our application relies on a strict relational model (PostgreSQL) to ensure ACID 
 *   **Joins:** Joins `Users.id` to `Groups.id`. 
 
 #### 4. `Expenses`
-*   **Why it exists:** The core record of a real-world transaction. It stores the *normalized* value of the expense. To solve Priya's USD issue, we don't force users to do math outside the app. We store the `original_currency` and `exchange_rate` so the system always knows the exact value in the group's `base_currency` at the moment the expense occurred.
+*   **Why it exists:** The core record of a real-world transaction. It stores the *normalized* value of the expense. To solve Priya's USD issue, we don't force users to do math outside the app. We store the `original_currency` and `exchange_rate` so the system always knows the exact value in the group's base currency at the moment the expense occurred.
 *   **Schema:** `id` (PK), `group_id` (FK -> Groups), `description` (String), `expense_date` (Date), `total_amount` (Decimal), `original_currency` (String), `exchange_rate` (Decimal), `is_deleted` (Boolean, Soft Delete).
 *   **Joins:** Belongs to a single `Group` (`group_id`).
 
@@ -200,8 +200,8 @@ Our application relies on a strict relational model (PostgreSQL) to ensure ACID 
 *   **Schema:** `id` (PK), `group_id` (FK -> Groups), `payer_id` (FK -> Users), `payee_id` (FK -> Users), `amount` (Decimal), `date` (Date).
 *   **Joins:** Belongs to a `Group`. Links two `Users` (`payer_id`, `payee_id`).
 
-#### 7. `ImportBatches` & `ImportAnomalies`
-*   **Why they exist:** To satisfy Meera's requirement for explicit approval. We cannot stream CSV data directly into `Expenses`. When a user uploads a file, it creates an `ImportBatch`. Every detected issue creates an `ImportAnomaly` containing the raw JSON of the problematic row. The UI queries these anomalies, allows the user to resolve them, and only then commits the clean data to the core tables.
-*   **Schema (Batches):** `id` (PK), `group_id` (FK -> Groups), `status` (String).
-*   **Schema (Anomalies):** `id` (PK), `batch_id` (FK -> ImportBatches), `anomaly_type` (String), `raw_row_data` (JSON), `resolution_status` (String).
-*   **Joins:** `ImportAnomalies.batch_id` links to `ImportBatches.id`.
+#### 7. `ImportRuns` & `ImportAnomalies`
+*   **Why they exist:** To satisfy Meera's requirement for explicit approval. We cannot stream CSV data directly into `Expenses`. When a user uploads a file, it creates an `ImportRun`. Every detected issue creates an `ImportAnomaly` containing the raw JSON of the problematic row. The UI queries these anomalies, allows the user to resolve them, and only then commits the clean data to the core tables.
+*   **Schema (Runs):** `id` (PK, UUID), `group_id` (FK -> Groups), `total_rows` (Integer), `imported` (Integer), `flagged` (Integer), `skipped` (Integer), `auto_fixed` (Integer), `exchange_rate_used` (Decimal), `timestamp` (DateTime).
+*   **Schema (Anomalies):** `id` (PK), `import_run_id` (FK -> ImportRuns), `csv_row` (Integer), `anomaly_type` (String), `description` (Text), `raw_data` (JSON), `action_taken` (String), `resolved` (Boolean), `resolved_at` (DateTime), `resolved_by` (FK -> Users).
+*   **Joins:** `ImportAnomalies.import_run_id` links to `ImportRuns.id`.

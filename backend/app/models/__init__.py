@@ -3,7 +3,7 @@ from .user import User
 from .group import Group, GroupMembership
 from .expense import Expense, ExpenseSplit, SplitType
 from .settlement import Settlement
-from .import_anomaly import ImportAnomaly
+from .import_anomaly import ImportAnomaly, ImportRun
 from .exchange_rate import ExchangeRate
 
 __all__ = [
@@ -16,5 +16,6 @@ __all__ = [
     "SplitType",
     "Settlement",
     "ImportAnomaly",
+    "ImportRun",
     "ExchangeRate",
 ]

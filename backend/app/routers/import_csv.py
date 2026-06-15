@@ -28,10 +28,14 @@ async def upload_csv(
 
 @router.get("/{run_id}/report", response_model=ImportReportOut)
 def get_report(run_id: str, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    # In a full implementation, this retrieves anomalies from db and formats as report.
-    pass
+    report = import_service.get_import_report(db, run_id)
+    if not report:
+        raise HTTPException(status_code=404, detail="Import run not found")
+    return report
 
 @router.post("/{run_id}/resolve/{anomaly_id}")
-def resolve_anomaly(run_id: str, anomaly_id: int, action: str = Form(...), db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    # Allows Meera to manually approve or reject a flagged row
-    pass
+def resolve_anomaly(run_id: str, anomaly_id: int, action: str = Form(...), corrected_value: str | None = Form(None), db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    success = import_service.resolve_import_anomaly(db, run_id, anomaly_id, action, corrected_value, current_user.id)
+    if not success:
+        raise HTTPException(status_code=400, detail="Failed to resolve anomaly. It may not exist, already be resolved, or the resolution data is invalid.")
+    return {"message": "Anomaly resolved successfully"}

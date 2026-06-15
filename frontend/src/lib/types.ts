@@ -12,8 +12,11 @@ export interface User {
 export interface Group {
   id: number;
   name: string;
+  description?: string;
   created_by: number;
   created_at: string;
+  members?: Member[];
+  total_expenses?: number;
 }
 
 export interface GroupDetail extends Group {
@@ -73,6 +76,7 @@ export interface BalanceSummary {
 
 export interface MemberBalance {
   user_id: number;
+  user_name: string;
   group_id: number;
   net_balance: number;
   owes: {

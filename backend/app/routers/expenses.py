@@ -5,21 +5,22 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.routers.auth import get_current_user
 from app.models.user import User
+from app.schemas.expense import ExpenseCreate, ExpenseOut
 from app.services import expense_service
 
 router = APIRouter()
 
-@router.post("")
+@router.post("", response_model=ExpenseOut, status_code=status.HTTP_201_CREATED)
 def create_expense(
     group_id: int,
-    expense_data: dict,
+    expense_data: ExpenseCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
     """Create a new expense with splits."""
     return expense_service.create_expense(db, group_id, expense_data, current_user.id)
 
-@router.get("/{group_id}")
+@router.get("/{group_id}", response_model=List[ExpenseOut])
 def list_expenses(
     group_id: int,
     skip: int = 0,
@@ -30,7 +31,7 @@ def list_expenses(
     """List all expenses for a group."""
     return expense_service.list_expenses(db, group_id, skip, limit)
 
-@router.get("/{group_id}/{expense_id}")
+@router.get("/{group_id}/{expense_id}", response_model=ExpenseOut)
 def get_expense(
     group_id: int,
     expense_id: int,

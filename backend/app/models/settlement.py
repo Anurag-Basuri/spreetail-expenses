@@ -2,7 +2,7 @@ from datetime import datetime, date
 from decimal import Decimal
 from typing import Optional
 from sqlalchemy import String, DateTime, Date, Numeric, ForeignKey, Text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 from .base import Base
 
@@ -19,5 +19,9 @@ class Settlement(Base):
     note: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
+    payer: Mapped["User"] = relationship("User", foreign_keys=[paid_by], lazy="joined")
+    payee: Mapped["User"] = relationship("User", foreign_keys=[paid_to], lazy="joined")
+
     def __repr__(self) -> str:
         return f"<Settlement(id={self.id}, paid_by={self.paid_by}, paid_to={self.paid_to}, amount={self.amount})>"
+

@@ -8,7 +8,8 @@ from app.routers.auth import get_current_user
 from app.models.user import User
 from app.schemas.group import GroupCreate, GroupOut, GroupDetail, MembershipCreate, MembershipLeave
 from app.schemas.user import UserOut
-from app.services import group_service
+from app.schemas.settlement import SettlementOut
+from app.services import group_service, settlement_service
 
 router = APIRouter()
 
@@ -52,9 +53,6 @@ def get_active_members(
 ):
     """Returns active members on a specific date (used by balance calculator and importer)."""
     return group_service.get_active_members(db, group_id, date)
-
-from app.services import settlement_service
-from app.schemas.settlement import SettlementOut
 
 @router.get("/{group_id}/settlements", response_model=List[SettlementOut])
 def list_group_settlements(

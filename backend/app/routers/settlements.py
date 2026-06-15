@@ -1,40 +1,22 @@
-from datetime import date
-from decimal import Decimal
-from fastapi import APIRouter, Depends, HTTPException, status, Form
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.routers.auth import get_current_user
 from app.models.user import User
-from app.models.settlement import Settlement
-from app.services import balance_service
+from app.schemas.settlement import SettlementCreate, SettlementOut
+from app.services import settlement_service, balance_service
 
 router = APIRouter()
 
-@router.post("", status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=SettlementOut, status_code=status.HTTP_201_CREATED)
 def create_settlement(
-    group_id: int = Form(...),
-    paid_to_id: int = Form(...),
-    amount: Decimal = Form(...),
-    settled_at: date = Form(...),
-    note: str = Form(""),
+    settlement_in: SettlementCreate,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
     """Record a settlement (debt repayment) between two users."""
-    db_settlement = Settlement(
-        group_id=group_id,
-        paid_by=current_user.id,
-        paid_to=paid_to_id,
-        amount=amount,
-        currency="INR",
-        settled_at=settled_at,
-        note=note
-    )
-    db.add(db_settlement)
-    db.commit()
-    db.refresh(db_settlement)
-    return db_settlement
+    return settlement_service.create_settlement(db, settlement_in.group_id, current_user.id, settlement_in)
 
 @router.get("/{group_id}/summary")
 def get_group_summary(

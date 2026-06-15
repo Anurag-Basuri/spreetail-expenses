@@ -52,3 +52,15 @@ def get_active_members(
 ):
     """Returns active members on a specific date (used by balance calculator and importer)."""
     return group_service.get_active_members(db, group_id, date)
+
+from app.services import settlement_service
+from app.schemas.settlement import SettlementOut
+
+@router.get("/{group_id}/settlements", response_model=List[SettlementOut])
+def list_group_settlements(
+    group_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """List all settlements for a group."""
+    return settlement_service.list_settlements(db, group_id)

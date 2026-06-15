@@ -5,13 +5,16 @@ import { redirect } from "next/navigation";
 // For now, assume this is a client-side auth protected layout.
 // Or we can just build the shell and let pages handle redirect if no user.
 
+import { AuthGuard } from "@/components/auth/AuthGuard";
+
 export default function AppLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-canvas">
+    <AuthGuard>
+      <div className="flex min-h-screen bg-canvas">
       {/* Desktop Sidebar */}
       <Sidebar />
       
@@ -24,6 +27,7 @@ export default function AppLayout({
           {children}
         </main>
       </div>
-    </div>
+      </div>
+    </AuthGuard>
   );
 }

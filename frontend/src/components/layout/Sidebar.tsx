@@ -19,10 +19,10 @@ export function Sidebar() {
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-3 px-3 py-2 rounded-xl text-sm transition-colors duration-150",
+        "flex items-center gap-3 px-3 py-2 text-sm transition-all duration-200 border-l-2",
         isActive 
-          ? "bg-brand-50 text-brand-600 font-medium" 
-          : "text-ink-600 hover:bg-canvas"
+          ? "bg-brand-50 text-brand-600 font-medium border-brand-500 rounded-r-xl" 
+          : "text-ink-600 hover:bg-canvas border-transparent rounded-xl hover:translate-x-1"
       )}
     >
       <Icon size={18} className={isActive ? "text-brand-500" : "text-ink-400"} />

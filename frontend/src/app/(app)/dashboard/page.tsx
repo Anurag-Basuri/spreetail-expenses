@@ -60,7 +60,7 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {groups.map(g => (
               <Link key={g.id} href={`/groups/${g.id}`}>
-                <Card className="hover:shadow-md transition-shadow h-full flex flex-col cursor-pointer hover:border-brand-100">
+                <Card className="hover:shadow-md transition-all duration-200 hover:-translate-y-1 h-full flex flex-col cursor-pointer hover:border-brand-100">
                   <div className="flex-1">
                     <h3 className="font-semibold text-ink-900 text-lg mb-1">{g.name}</h3>
                     <p className="text-sm text-ink-600 mb-4">Click to view expenses</p>

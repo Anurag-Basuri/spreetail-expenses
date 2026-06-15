@@ -39,6 +39,42 @@ The frontend is a modern React application utilizing the **Next.js App Router** 
 
 ---
 
+## 📡 API Routes
+
+The backend exposes a fully documented REST API. Below are the primary endpoints. You can view the full interactive OpenAPI schema at `http://localhost:8000/docs`.
+
+### Authentication
+- `POST /api/auth/register` - Create a new user account.
+- `POST /api/auth/login` - Obtain a JWT Bearer token.
+- `GET /api/auth/me` - Get current authenticated user details.
+
+### Groups
+- `POST /api/groups` - Create a new expense group.
+- `GET /api/groups` - List all groups the user belongs to.
+- `GET /api/groups/{group_id}` - Get full details of a specific group.
+- `POST /api/groups/{group_id}/members` - Add a member to a group.
+- `PATCH /api/groups/{group_id}/members/{user_id}/leave` - Set a member's leave date.
+- `GET /api/groups/{group_id}/members?date={YYYY-MM-DD}` - Get active members on a specific date.
+
+### Expenses
+- `POST /api/expenses?group_id={id}` - Create a new expense with complex splits.
+- `GET /api/expenses/{group_id}` - List all active expenses for a group.
+- `GET /api/expenses/{group_id}/{expense_id}` - View exact split details for a single expense.
+- `DELETE /api/expenses/{expense_id}` - Soft-delete an expense.
+
+### Settlements & Balances
+- `POST /api/settlements` - Record a debt repayment between two users.
+- `GET /api/groups/{group_id}/settlements` - List all historical settlements for a group.
+- `GET /api/settlements/{group_id}/summary` - Get simplified Graph-based balances (minimum transactions to settle all debts).
+- `GET /api/settlements/{group_id}/member/{user_id}` - Get detailed raw balance sheet for a specific user.
+
+### Smart CSV Import
+- `POST /api/import` - Upload a CSV file and run the anomaly detection engine. Returns an `ImportReport`.
+- `GET /api/import/{run_id}/report` - Retrieve a previously generated import report.
+- `POST /api/import/{run_id}/resolve/{anomaly_id}` - Submit a human resolution (Approve/Reject/Modify) for a flagged anomaly.
+
+---
+
 ## 🚀 Setup & Installation Instructions
 
 ### Prerequisites

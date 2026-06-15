@@ -54,25 +54,31 @@ erDiagram
         int id PK
         int group_id FK
         string description
-        date expense_date
-        decimal total_amount
+        decimal amount
         string currency
+        decimal amount_inr
         decimal exchange_rate
+        int paid_by FK
+        string split_type
+        date expense_date
+        boolean is_settlement
     }
     EXPENSE_SPLITS {
         int id PK
         int expense_id FK
         int user_id FK
-        decimal amount_paid
         decimal amount_owed
+        decimal share_value
+        boolean settled
     }
     SETTLEMENTS {
         int id PK
         int group_id FK
-        int payer_id FK
-        int payee_id FK
+        int paid_by FK
+        int paid_to FK
         decimal amount
-        date settlement_date
+        string currency
+        date settled_at
     }
     IMPORT_BATCHES {
         int id PK

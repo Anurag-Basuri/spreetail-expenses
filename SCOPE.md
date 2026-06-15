@@ -186,13 +186,13 @@ Our application relies on a strict relational model (PostgreSQL) to ensure ACID 
 *   **Joins:** Joins `Users.id` to `Groups.id`. 
 
 #### 4. `Expenses`
-*   **Why it exists:** The core record of a real-world transaction. It stores the *normalized* value of the expense. To solve Priya's USD issue, we don't force users to do math outside the app. We store the `original_currency` and `exchange_rate` so the system always knows the exact value in the group's base currency at the moment the expense occurred.
-*   **Schema:** `id` (PK), `group_id` (FK -> Groups), `description` (String), `expense_date` (Date), `total_amount` (Decimal), `original_currency` (String), `exchange_rate` (Decimal), `is_deleted` (Boolean, Soft Delete).
-*   **Joins:** Belongs to a single `Group` (`group_id`).
+*   **Why it exists:** The core record of a real-world transaction. It stores the *normalized* value of the expense. To solve Priya's USD issue, we don't force users to do math outside the app. We store the `currency` and `exchange_rate` so the system always knows the exact value in the group's base currency (`amount_inr`) at the moment the expense occurred.
+*   **Schema:** `id` (PK), `group_id` (FK -> Groups), `description` (String), `amount` (Decimal), `currency` (String), `amount_inr` (Decimal), `exchange_rate` (Decimal), `paid_by` (FK -> Users), `split_type` (String), `expense_date` (Date), `is_settlement` (Boolean), `import_row` (Integer, Nullable), `import_note` (Text, Nullable), `is_deleted` (Boolean, Soft Delete).
+*   **Joins:** Belongs to a single `Group` (`group_id`). Links to `Users` (`paid_by`).
 
 #### 5. `ExpenseSplits`
-*   **Why it exists:** An expense is rarely paid by one person and owed entirely by another. This table breaks down a single `Expense` into exact `amount_paid` and `amount_owed` for every `User` involved. It is the ledger entry that drives Rohan's "Audit Trail" requirement.
-*   **Schema:** `id` (PK), `expense_id` (FK -> Expenses), `user_id` (FK -> Users), `amount_paid` (Decimal), `amount_owed` (Decimal).
+*   **Why it exists:** An expense is rarely paid by one person and owed entirely by another. This table breaks down a single `Expense` into exact `amount_owed` for every `User` involved. It also tracks the `share_value` (e.g., percentage or share proportion). It is the ledger entry that drives Rohan's "Audit Trail" requirement.
+*   **Schema:** `id` (PK), `expense_id` (FK -> Expenses), `user_id` (FK -> Users), `amount_owed` (Decimal), `share_value` (Decimal, Nullable), `settled` (Boolean).
 *   **Joins:** Links `Expenses.id` to specific `Users.id`.
 
 #### 6. `Settlements`

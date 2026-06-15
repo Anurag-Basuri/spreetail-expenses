@@ -12,6 +12,8 @@ import {
   Loader2,
   ChevronRight,
   X,
+  CreditCard,
+  PieChart
 } from "lucide-react";
 
 interface Group {
@@ -63,144 +65,163 @@ export default function DashboardPage() {
 
   if (authLoading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#f4f5f6]">
         <Loader2 size={32} className="animate-spin text-primary" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
-      {/* ── Nav ── */}
-      <nav className="flex items-center justify-between px-6 py-4 border-b border-border">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-white font-bold text-sm">E</span>
+    <div className="min-h-screen bg-[#f4f5f6]">
+      {/* ── Top Navigation Bar ── */}
+      <nav className="bg-[#5bc5a7] text-white shadow-md">
+        <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded bg-white text-[#5bc5a7] flex items-center justify-center">
+              <PieChart size={20} />
+            </div>
+            <span className="text-xl font-bold tracking-tight">EquiSplit</span>
           </div>
-          <span className="text-lg font-bold tracking-tight">EquiSplit</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-muted">
-            Hi, <span className="text-foreground font-medium">{user.name}</span>
-          </span>
-          <button onClick={logout} className="btn-secondary text-sm px-3 py-2">
-            <LogOut size={14} /> Logout
-          </button>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-[#489d85] flex items-center justify-center border-2 border-[#fff]">
+                <span className="font-bold text-sm">{user.name.charAt(0).toUpperCase()}</span>
+              </div>
+              <span className="text-sm font-medium hidden sm:block">{user.name}</span>
+            </div>
+            <button onClick={logout} className="text-white/80 hover:text-white transition-colors" title="Logout">
+              <LogOut size={18} />
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* ── Content ── */}
-      <div className="max-w-4xl mx-auto px-6 py-10">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold">Your Groups</h1>
-            <p className="text-muted text-sm mt-1">
-              Select a group to view balances and expenses
-            </p>
-          </div>
-          <button
-            onClick={() => setShowCreate(true)}
-            className="btn-primary"
-          >
-            <Plus size={18} /> New Group
-          </button>
-        </div>
-
-        {/* ── Create Group Modal ── */}
-        {showCreate && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-            <div className="glass p-6 w-full max-w-md animate-slide-up">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold">Create New Group</h2>
-                <button
-                  onClick={() => setShowCreate(false)}
-                  className="text-muted hover:text-foreground transition"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-              <input
-                type="text"
-                className="input mb-4"
-                placeholder="e.g., Goa Trip 2026"
-                value={newGroupName}
-                onChange={(e) => setNewGroupName(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleCreateGroup()}
-                autoFocus
-              />
-              <div className="flex items-center gap-3 justify-end">
-                <button
-                  onClick={() => setShowCreate(false)}
-                  className="btn-secondary"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleCreateGroup}
-                  className="btn-primary"
-                  disabled={creating || !newGroupName.trim()}
-                >
-                  {creating ? (
-                    <Loader2 size={16} className="animate-spin" />
-                  ) : (
-                    <Plus size={16} />
-                  )}
-                  Create
-                </button>
-              </div>
+      {/* ── Main Content Area ── */}
+      <div className="max-w-5xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        {/* Left Sidebar (Desktop) or Top Banner (Mobile) */}
+        <div className="col-span-1 space-y-6">
+          <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
+            <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4 border-2 border-gray-200">
+              <span className="text-2xl font-bold text-gray-400">{user.name.charAt(0).toUpperCase()}</span>
+            </div>
+            <h2 className="text-center font-bold text-lg text-gray-800">{user.name}</h2>
+            <p className="text-center text-sm text-gray-500 mb-6">{user.email}</p>
+            <div className="border-t border-gray-100 pt-4 flex flex-col gap-2">
+              <button onClick={() => setShowCreate(true)} className="btn-primary w-full shadow-none text-sm py-2.5">
+                <Plus size={16} /> Start a new group
+              </button>
             </div>
           </div>
-        )}
+        </div>
 
-        {/* ── Group List ── */}
-        {loading ? (
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="skeleton h-20 w-full" />
-            ))}
+        {/* Right Content / Dashboard */}
+        <div className="col-span-1 md:col-span-2">
+          
+          {/* Dashboard Header */}
+          <div className="bg-white rounded-t-lg border-b border-gray-200 p-4 flex items-center justify-between shadow-sm">
+            <h1 className="text-xl font-bold text-gray-800">Dashboard</h1>
           </div>
-        ) : groups.length === 0 ? (
-          <div className="glass p-12 text-center">
-            <Users size={48} className="mx-auto text-muted mb-4" />
-            <h3 className="text-lg font-semibold mb-1">No groups yet</h3>
-            <p className="text-muted text-sm">
-              Create your first group to start tracking shared expenses.
-            </p>
+
+          {/* Group List */}
+          <div className="bg-white rounded-b-lg shadow-sm min-h-[400px]">
+            {loading ? (
+              <div className="p-6 space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="skeleton h-16 w-full rounded" />
+                ))}
+              </div>
+            ) : groups.length === 0 ? (
+              <div className="p-16 text-center">
+                <Users size={48} className="mx-auto text-gray-300 mb-4" />
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">No groups yet</h3>
+                <p className="text-gray-500 text-sm mb-6 max-w-sm mx-auto">
+                  EquiSplit helps you keep track of shared expenses with your friends, roommates, and family.
+                </p>
+                <button onClick={() => setShowCreate(true)} className="btn-primary">
+                  <Plus size={16} /> Start a new group
+                </button>
+              </div>
+            ) : (
+              <div className="divide-y divide-gray-100">
+                {groups.map((group, i) => (
+                  <Link
+                    key={group.id}
+                    href={`/dashboard/${group.id}`}
+                    className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors animate-fade-in group block"
+                    style={{ animationDelay: `${0.03 * i}s`, opacity: 0 }}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded border border-gray-200 flex items-center justify-center bg-gray-50 text-gray-400">
+                        <Users size={20} />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-800 text-lg">{group.name}</h3>
+                        <p className="text-xs text-gray-500">
+                          Created {new Date(group.created_at).toLocaleDateString("en-IN", { month: "long", year: "numeric" })}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-medium text-gray-400 group-hover:text-[#5bc5a7] transition-colors">View</span>
+                      <ChevronRight size={18} className="text-gray-300 group-hover:text-[#5bc5a7] transition-colors" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="space-y-3">
-            {groups.map((group, i) => (
-              <Link
-                key={group.id}
-                href={`/dashboard/${group.id}`}
-                className="glass-sm p-5 flex items-center justify-between hover:border-primary/50 transition-all duration-200 group block animate-fade-in"
-                style={{ animationDelay: `${0.05 * i}s`, opacity: 0 }}
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-11 h-11 rounded-xl bg-primary/15 text-primary flex items-center justify-center font-bold text-lg">
-                    {group.name.charAt(0).toUpperCase()}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">{group.name}</h3>
-                    <p className="text-sm text-muted">
-                      Created{" "}
-                      {new Date(group.created_at).toLocaleDateString("en-IN", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </p>
-                  </div>
-                </div>
-                <ChevronRight
-                  size={20}
-                  className="text-muted group-hover:text-primary transition-colors"
-                />
-              </Link>
-            ))}
-          </div>
-        )}
+
+        </div>
       </div>
+
+      {/* ── Create Group Modal ── */}
+      {showCreate && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md animate-slide-up shadow-xl">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-gray-800">Start a new group</h2>
+              <button
+                onClick={() => setShowCreate(false)}
+                className="text-gray-400 hover:text-gray-600 transition"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div className="flex gap-4 items-center mb-6">
+              <div className="w-16 h-16 border-2 border-dashed border-gray-300 rounded flex items-center justify-center bg-gray-50 text-gray-400">
+                <Users size={24} />
+              </div>
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Group name</label>
+                <input
+                  type="text"
+                  className="w-full text-lg border-b-2 border-gray-200 focus:border-[#5bc5a7] px-0 py-1 outline-none transition-colors"
+                  placeholder="e.g. Apartment, Goa Trip"
+                  value={newGroupName}
+                  onChange={(e) => setNewGroupName(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleCreateGroup()}
+                  autoFocus
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 justify-end border-t border-gray-100 pt-4">
+              <button onClick={() => setShowCreate(false)} className="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded transition-colors">
+                Cancel
+              </button>
+              <button
+                onClick={handleCreateGroup}
+                className="btn-primary"
+                disabled={creating || !newGroupName.trim()}
+              >
+                {creating ? <Loader2 size={16} className="animate-spin" /> : "Save"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

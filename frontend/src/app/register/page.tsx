@@ -35,14 +35,14 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="glass p-8 w-full max-w-md animate-slide-up">
+      <div className="bg-white p-8 w-full max-w-md rounded-xl shadow-lg border border-gray-100 animate-slide-up">
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-white font-bold">E</span>
+          <div className="w-10 h-10 rounded bg-[#5bc5a7] flex items-center justify-center shadow-sm">
+            <span className="text-white font-bold text-lg">E</span>
           </div>
           <div>
-            <h1 className="text-xl font-bold">Create your account</h1>
-            <p className="text-sm text-muted">Join EquiSplit and start splitting</p>
+            <h1 className="text-xl font-bold text-gray-800">Create your account</h1>
+            <p className="text-sm text-gray-500">Join EquiSplit and start splitting</p>
           </div>
         </div>
 

@@ -9,7 +9,7 @@ export default function TopNav() {
 
   return (
     <nav className="bg-[#5bc5a7] text-white shadow-md sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
         <Link href="/dashboard" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
           <div className="w-8 h-8 rounded bg-white text-[#5bc5a7] flex items-center justify-center">
             <PieChart size={20} />

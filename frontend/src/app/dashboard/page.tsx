@@ -78,43 +78,43 @@ export default function DashboardPage() {
       <TopNav />
 
       {/* ── Main Content Area ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-12 grid grid-cols-1 lg:grid-cols-4 gap-12">
         
         {/* Left Sidebar (Desktop) */}
-        <div className="lg:col-span-1 space-y-4">
+        <div className="lg:col-span-1 space-y-8">
           
           {/* User Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div className="bg-[#5bc5a7] h-12 w-full"></div>
-            <div className="px-6 pb-6 pt-0 text-center relative">
-              <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mx-auto mb-3 border-4 border-white shadow-sm -mt-8 relative z-10">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+            <div className="bg-[#5bc5a7] h-20 w-full"></div>
+            <div className="px-8 pb-8 pt-0 text-center relative">
+              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center mx-auto mb-4 border-4 border-white shadow-sm -mt-10 relative z-10">
                 <div className="w-full h-full rounded-full bg-[#489d85] flex items-center justify-center text-white">
-                  <span className="text-2xl font-bold">{user.name.charAt(0).toUpperCase()}</span>
+                  <span className="text-3xl font-bold">{user.name.charAt(0).toUpperCase()}</span>
                 </div>
               </div>
-              <h2 className="font-bold text-lg text-gray-800 leading-tight">{user.name}</h2>
-              <p className="text-xs text-gray-500 font-medium mb-4">{user.email}</p>
+              <h2 className="font-bold text-xl text-gray-800 leading-tight mb-1">{user.name}</h2>
+              <p className="text-sm text-gray-500 font-medium mb-2">{user.email}</p>
             </div>
           </div>
 
           {/* Sidebar Menu */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-2">
-            <nav className="flex flex-col space-y-1">
-              <div className="px-3 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Navigation</div>
-              <Link href="/dashboard" className="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#5bc5a7]/10 text-[#489d85] font-semibold transition-colors">
-                <Wallet size={18} />
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+            <nav className="flex flex-col space-y-2">
+              <div className="px-4 py-3 text-xs font-bold text-gray-400 uppercase tracking-widest">Navigation</div>
+              <Link href="/dashboard" className="flex items-center gap-4 px-4 py-3 rounded-xl bg-[#5bc5a7]/10 text-[#489d85] font-bold transition-colors">
+                <Wallet size={20} />
                 Dashboard
               </Link>
-              <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-medium transition-colors text-left w-full cursor-not-allowed opacity-60">
-                <Activity size={18} />
+              <button className="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-semibold transition-colors text-left w-full cursor-not-allowed opacity-60">
+                <Activity size={20} />
                 Recent activity
               </button>
-              <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-medium transition-colors text-left w-full cursor-not-allowed opacity-60">
-                <User size={18} />
+              <button className="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-semibold transition-colors text-left w-full cursor-not-allowed opacity-60">
+                <User size={20} />
                 Friends
               </button>
-              <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-medium transition-colors text-left w-full cursor-not-allowed opacity-60">
-                <Settings size={18} />
+              <button className="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-semibold transition-colors text-left w-full cursor-not-allowed opacity-60">
+                <Settings size={20} />
                 Account settings
               </button>
             </nav>
@@ -123,27 +123,27 @@ export default function DashboardPage() {
         </div>
 
         {/* Right Content / Dashboard */}
-        <div className="lg:col-span-3 space-y-6">
+        <div className="lg:col-span-3 space-y-10">
           
           {/* Dashboard Header Bar */}
-          <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col sm:flex-row sm:items-center justify-between shadow-sm gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-[#5bc5a7]/10 rounded-lg text-[#5bc5a7]">
-                <Wallet size={24} />
+          <div className="bg-white rounded-2xl border border-gray-200 p-8 flex flex-col sm:flex-row sm:items-center justify-between shadow-sm gap-6">
+            <div className="flex items-center gap-5">
+              <div className="p-3 bg-[#5bc5a7]/10 rounded-xl text-[#5bc5a7]">
+                <Wallet size={32} />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-800 tracking-tight">Dashboard</h1>
-                <p className="text-sm text-gray-500 font-medium">Overview of your shared expenses and groups.</p>
+                <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight mb-1">Dashboard</h1>
+                <p className="text-base text-gray-500 font-medium">Overview of your shared expenses and groups.</p>
               </div>
             </div>
-            <button onClick={() => setShowCreate(true)} className="btn-primary shadow-lg bg-[#ff652f] hover:bg-[#e55a2a] whitespace-nowrap px-6">
-              <Plus size={18} /> Start a new group
+            <button onClick={() => setShowCreate(true)} className="btn-primary shadow-lg bg-[#ff652f] hover:bg-[#e55a2a] whitespace-nowrap px-8 py-3 text-base">
+              <Plus size={20} /> Start a new group
             </button>
           </div>
 
           {/* Group List Area */}
           <div>
-            <h2 className="text-lg font-bold text-gray-800 mb-4 px-1">Your Groups</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-6 px-2">Your Groups</h2>
             
             {loading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -152,40 +152,40 @@ export default function DashboardPage() {
                 ))}
               </div>
             ) : groups.length === 0 ? (
-              <div className="bg-white rounded-xl border border-gray-200 p-16 text-center shadow-sm">
-                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-100">
-                  <Users size={32} className="text-gray-300" />
+              <div className="bg-white rounded-2xl border border-gray-200 p-16 text-center shadow-sm">
+                <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 border border-gray-100">
+                  <Users size={40} className="text-gray-300" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">No groups yet</h3>
-                <p className="text-gray-500 mb-6 max-w-sm mx-auto font-medium">
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">No groups yet</h3>
+                <p className="text-gray-500 mb-8 max-w-md mx-auto font-medium text-base leading-relaxed">
                   EquiSplit helps you keep track of shared expenses with your friends, roommates, and family. Create a group to get started.
                 </p>
-                <button onClick={() => setShowCreate(true)} className="btn-primary mx-auto">
-                  <Plus size={18} /> Start a new group
+                <button onClick={() => setShowCreate(true)} className="btn-primary mx-auto px-8 py-3 text-base">
+                  <Plus size={20} /> Start a new group
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {groups.map((group, i) => (
                   <Link
                     key={group.id}
                     href={`/dashboard/${group.id}`}
-                    className="bg-white rounded-xl border border-gray-200 p-5 flex items-center justify-between hover:border-[#5bc5a7] hover:shadow-md transition-all group animate-fade-in"
+                    className="bg-white rounded-2xl border border-gray-200 p-6 flex items-center justify-between hover:border-[#5bc5a7] hover:shadow-lg transition-all group animate-fade-in"
                     style={{ animationDelay: `${0.03 * i}s`, opacity: 0 }}
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-lg border border-gray-100 flex items-center justify-center bg-gray-50 text-gray-400 group-hover:bg-[#5bc5a7]/10 group-hover:text-[#5bc5a7] transition-colors">
-                        <Users size={24} />
+                    <div className="flex items-center gap-5">
+                      <div className="w-16 h-16 rounded-xl border border-gray-100 flex items-center justify-center bg-gray-50 text-gray-400 group-hover:bg-[#5bc5a7]/10 group-hover:text-[#5bc5a7] transition-colors">
+                        <Users size={28} />
                       </div>
                       <div>
-                        <h3 className="font-bold text-gray-800 text-lg group-hover:text-[#5bc5a7] transition-colors">{group.name}</h3>
-                        <p className="text-xs text-gray-500 font-medium mt-0.5">
+                        <h3 className="font-bold text-gray-800 text-xl group-hover:text-[#5bc5a7] transition-colors mb-1">{group.name}</h3>
+                        <p className="text-sm text-gray-500 font-medium">
                           Created {new Date(group.created_at).toLocaleDateString("en-IN", { month: "short", year: "numeric" })}
                         </p>
                       </div>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#5bc5a7] transition-colors">
-                      <ChevronRight size={18} className="text-gray-300 group-hover:text-white transition-colors" />
+                    <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#5bc5a7] transition-colors">
+                      <ChevronRight size={20} className="text-gray-300 group-hover:text-white transition-colors" />
                     </div>
                   </Link>
                 ))}

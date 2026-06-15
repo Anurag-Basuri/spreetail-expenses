@@ -153,7 +153,7 @@ def detect_anomalies(
 
     # 9. SETTLEMENT_AS_EXPENSE
     desc = row.get('description', '').lower()
-    if 'settlement' in desc or 'paid back' in desc or 'deposit' in desc:
+    if 'settlement' in desc or 'deposit' in desc or ('paid' in desc and 'back' in desc):
         anomalies.append(Anomaly(
             row_number, AnomalyType.SETTLEMENT_AS_EXPENSE, "WARNING",
             "Row looks like a settlement but is logged as an expense.", desc, "AUTO_FIXED: Convert to Settlement record", True, "settlement"

@@ -1,248 +1,27 @@
-@import "tailwindcss";
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
-  --color-surface: var(--surface);
-  --color-surface-hover: var(--surface-hover);
-  --color-border: var(--border-color);
-  --color-accent: var(--accent);
-  --color-success: var(--success);
-  --color-warning: var(--warning);
-  --color-danger: var(--danger);
-  --color-muted: var(--muted);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
 :root {
-  --background: #f4f5f6; /* Light gray background, typical of Splitwise */
-  --foreground: #333333; /* Dark gray text */
-  --primary: #5bc5a7; /* Splitwise Mint Green */
-  --primary-hover: #489d85;
-  --surface: #ffffff; /* White cards */
-  --surface-hover: #fafafa;
-  --border-color: #e2e8f0;
-  --accent: #06b6d4;
-  --success: #5bc5a7; /* Same as primary for "You are owed" */
-  --warning: #f59e0b;
-  --danger: #ff652f; /* Splitwise Orange/Red for "You owe" */
-  --muted: #999999;
+  --font-inter: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: #18181B; /* text-ink-900 */
 }
 
-/* ── Clean Card panels (Replacing dark glass) ── */
-.glass {
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+/* The signature typographic rule: money is always mono */
+.amount {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
-.glass-sm {
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
-/* ── Button base ── */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(91, 197, 167, 0.2);
-}
-.btn-primary:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(91, 197, 167, 0.3);
-}
-.btn-primary:active {
-  transform: translateY(0);
-}
-.btn-primary:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  background: #ffffff;
-  color: var(--foreground);
-  border: 1px solid var(--border-color);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-.btn-secondary:hover {
-  background: var(--surface-hover);
-  border-color: #cbd5e1;
-}
-
-.btn-danger {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  background: var(--danger);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.btn-danger:hover {
-  background: #e55a2a;
-}
-
-.btn-success {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  background: var(--success);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.btn-success:hover {
-  background: var(--primary-hover);
-}
-
-/* ── Input base ── */
-.input {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  background: #ffffff;
-  color: var(--foreground);
-  font-size: 0.875rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  outline: none;
-}
-.input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(91, 197, 167, 0.15);
-}
-.input::placeholder {
-  color: #a0aec0;
-}
-
-/* ── Badge system ── */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-}
-.badge-error {
-  background: rgba(255, 101, 47, 0.1);
-  color: var(--danger);
-}
-.badge-warning {
-  background: rgba(245, 158, 11, 0.1);
-  color: var(--warning);
-}
-.badge-success {
-  background: rgba(91, 197, 167, 0.1);
-  color: var(--success);
-}
-.badge-info {
-  background: rgba(6, 182, 212, 0.1);
-  color: var(--accent);
-}
-
-/* ── Animations ── */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(91, 197, 167, 0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(91, 197, 167, 0); }
-}
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-.animate-slide-up {
-  animation: slideUp 0.4s ease-out forwards;
-}
-.skeleton {
-  background: linear-gradient(90deg, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 6px;
-}
-
-/* ── Scrollbar ── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+/* Prevent zoom on inputs in mobile Safari */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
 }

@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
+import "./globals.css";
 
 const inter = Inter({
-  variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "swap",
+  variable: "--font-inter",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "EquiSplit — Smart Shared Expenses",
-  description:
-    "Track shared expenses, simplify debts, and import messy spreadsheets with intelligent anomaly detection.",
+  title: "SplitSmart",
+  description: "Shared expenses made simple",
 };
 
 export default function RootLayout({
@@ -21,9 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans">
-        <AuthProvider>{children}</AuthProvider>
+    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
+      <body className="bg-canvas font-sans antialiased min-h-screen flex flex-col">
+        {/* We're keeping AuthProvider here for now, eventually migrate to React Query/Server Components */}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

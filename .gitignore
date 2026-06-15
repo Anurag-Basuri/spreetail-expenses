@@ -4,3 +4,14 @@ backend/__pycache__/
 *.pyc
 .pytest_cache/
 .DS_Store
+
+# Environment variables
+backend/.env
+
+# Local databases
+*.db
+*.sqlite3
+
+# Project specific files
+Assignment_Spreetail.pdf
+expenses_export.csv

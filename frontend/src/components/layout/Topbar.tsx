@@ -33,9 +33,9 @@ export function Topbar() {
   return (
     <>
       {/* Mobile Topbar */}
-      <div className="md:hidden h-14 bg-surface border-b border-border flex items-center justify-between px-4 sticky top-0 z-20">
+      <div className="md:hidden h-14 bg-surface/80 backdrop-blur-md border-b border-border flex items-center justify-between px-4 sticky top-0 z-20">
         <span className="font-bold text-ink-900">SplitSmart</span>
-        <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 -mr-2 text-ink-600">
+        <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 -mr-2 text-ink-600 transition-transform active:scale-95">
           <Menu size={24} />
         </button>
       </div>

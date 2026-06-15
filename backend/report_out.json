@@ -1,0 +1,2064 @@
+{
+  "run_id": "ef552561-7fac-4189-94de-47c60e1f94c3",
+  "total_rows": 42,
+  "imported": 0,
+  "flagged": 42,
+  "skipped": 0,
+  "auto_fixed": 0,
+  "anomalies": [
+    {
+      "id": 1,
+      "row_number": 1,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 2,
+      "row_number": 1,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 3,
+      "row_number": 1,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 4,
+      "row_number": 1,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 5,
+      "row_number": 1,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 6,
+      "row_number": 2,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Priya' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 7,
+      "row_number": 2,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 8,
+      "row_number": 2,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 9,
+      "row_number": 2,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 10,
+      "row_number": 2,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 11,
+      "row_number": 3,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 12,
+      "row_number": 3,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 13,
+      "row_number": 3,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 14,
+      "row_number": 3,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 15,
+      "row_number": 3,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 16,
+      "row_number": 4,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Dev' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 17,
+      "row_number": 4,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 18,
+      "row_number": 4,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 19,
+      "row_number": 4,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 20,
+      "row_number": 4,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 21,
+      "row_number": 5,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Dev' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 22,
+      "row_number": 5,
+      "anomaly_type": "NEAR_DUPLICATE",
+      "severity": "WARNING",
+      "description": "Potential duplicate of row 4 based on venue and participants.",
+      "suggested_action": "FLAGGED: Human review required",
+      "auto_resolved": false
+    },
+    {
+      "id": 23,
+      "row_number": 5,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 24,
+      "row_number": 5,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 25,
+      "row_number": 5,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 26,
+      "row_number": 5,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 27,
+      "row_number": 6,
+      "anomaly_type": "MALFORMED_AMOUNT",
+      "severity": "WARNING",
+      "description": "Amount contains commas.",
+      "suggested_action": "AUTO_FIXED: Stripped commas",
+      "auto_resolved": true
+    },
+    {
+      "id": 28,
+      "row_number": 6,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 29,
+      "row_number": 6,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 30,
+      "row_number": 6,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 31,
+      "row_number": 6,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 32,
+      "row_number": 6,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 33,
+      "row_number": 7,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Meera' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 34,
+      "row_number": 7,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 35,
+      "row_number": 7,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 36,
+      "row_number": 7,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 37,
+      "row_number": 7,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 38,
+      "row_number": 8,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'priya' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 39,
+      "row_number": 8,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 40,
+      "row_number": 8,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 41,
+      "row_number": 8,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 42,
+      "row_number": 9,
+      "anomaly_type": "EXCESS_DECIMALS",
+      "severity": "WARNING",
+      "description": "Amount has more than 2 decimal places.",
+      "suggested_action": "AUTO_FIXED: Rounded to 2 decimal places",
+      "auto_resolved": true
+    },
+    {
+      "id": 43,
+      "row_number": 9,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 44,
+      "row_number": 9,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 45,
+      "row_number": 9,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 46,
+      "row_number": 9,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 47,
+      "row_number": 9,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 48,
+      "row_number": 10,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Priya S' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 49,
+      "row_number": 10,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 50,
+      "row_number": 10,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 51,
+      "row_number": 10,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 52,
+      "row_number": 10,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 53,
+      "row_number": 11,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 54,
+      "row_number": 11,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 55,
+      "row_number": 11,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 56,
+      "row_number": 11,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 57,
+      "row_number": 12,
+      "anomaly_type": "MISSING_PAYER",
+      "severity": "ERROR",
+      "description": "Payer name is missing.",
+      "suggested_action": "FLAGGED: User must select payer",
+      "auto_resolved": false
+    },
+    {
+      "id": 58,
+      "row_number": 12,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 59,
+      "row_number": 12,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 60,
+      "row_number": 12,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 61,
+      "row_number": 12,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 62,
+      "row_number": 13,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 63,
+      "row_number": 13,
+      "anomaly_type": "MISSING_SPLIT_TYPE",
+      "severity": "WARNING",
+      "description": "Split type is missing.",
+      "suggested_action": "AUTO_FIXED: Defaulted to 'equal'",
+      "auto_resolved": true
+    },
+    {
+      "id": 64,
+      "row_number": 13,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 65,
+      "row_number": 14,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 66,
+      "row_number": 14,
+      "anomaly_type": "INVALID_PERCENTAGES",
+      "severity": "ERROR",
+      "description": "Percentages sum to 110, not 100.",
+      "suggested_action": "FLAGGED: Adjust percentages",
+      "auto_resolved": false
+    },
+    {
+      "id": 67,
+      "row_number": 14,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 68,
+      "row_number": 14,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 69,
+      "row_number": 14,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 70,
+      "row_number": 14,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 71,
+      "row_number": 15,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 72,
+      "row_number": 15,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '01/03/2026' interpreted as DD/MM/YYYY (March 1). Could also be January 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 73,
+      "row_number": 15,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 74,
+      "row_number": 15,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 75,
+      "row_number": 15,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 76,
+      "row_number": 15,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 77,
+      "row_number": 16,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Meera' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 78,
+      "row_number": 16,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 79,
+      "row_number": 16,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 80,
+      "row_number": 16,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 81,
+      "row_number": 16,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 82,
+      "row_number": 17,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 83,
+      "row_number": 17,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '05/03/2026' interpreted as DD/MM/YYYY (March 5). Could also be May 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 84,
+      "row_number": 17,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 85,
+      "row_number": 17,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 86,
+      "row_number": 17,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 87,
+      "row_number": 17,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 88,
+      "row_number": 18,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 89,
+      "row_number": 18,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '08/03/2026' interpreted as DD/MM/YYYY (March 8). Could also be August 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 90,
+      "row_number": 18,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 91,
+      "row_number": 18,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 92,
+      "row_number": 18,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 93,
+      "row_number": 18,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 94,
+      "row_number": 19,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Dev' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 95,
+      "row_number": 19,
+      "anomaly_type": "FOREIGN_CURRENCY",
+      "severity": "ERROR",
+      "description": "Currency is USD, which requires an exchange rate.",
+      "suggested_action": "FLAGGED: Provide exchange rate to base currency",
+      "auto_resolved": false
+    },
+    {
+      "id": 96,
+      "row_number": 19,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '09/03/2026' interpreted as DD/MM/YYYY (March 9). Could also be September 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 97,
+      "row_number": 19,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 98,
+      "row_number": 19,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 99,
+      "row_number": 19,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 100,
+      "row_number": 19,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 101,
+      "row_number": 20,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 102,
+      "row_number": 20,
+      "anomaly_type": "FOREIGN_CURRENCY",
+      "severity": "ERROR",
+      "description": "Currency is USD, which requires an exchange rate.",
+      "suggested_action": "FLAGGED: Provide exchange rate to base currency",
+      "auto_resolved": false
+    },
+    {
+      "id": 103,
+      "row_number": 20,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '10/03/2026' interpreted as DD/MM/YYYY (March 10). Could also be October 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 104,
+      "row_number": 20,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 105,
+      "row_number": 20,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 106,
+      "row_number": 20,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 107,
+      "row_number": 20,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 108,
+      "row_number": 21,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Priya' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 109,
+      "row_number": 21,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '10/03/2026' interpreted as DD/MM/YYYY (March 10). Could also be October 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 110,
+      "row_number": 21,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 111,
+      "row_number": 21,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 112,
+      "row_number": 21,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 113,
+      "row_number": 21,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 114,
+      "row_number": 22,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Dev' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 115,
+      "row_number": 22,
+      "anomaly_type": "FOREIGN_CURRENCY",
+      "severity": "ERROR",
+      "description": "Currency is USD, which requires an exchange rate.",
+      "suggested_action": "FLAGGED: Provide exchange rate to base currency",
+      "auto_resolved": false
+    },
+    {
+      "id": 116,
+      "row_number": 22,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '11/03/2026' interpreted as DD/MM/YYYY (March 11). Could also be November 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 117,
+      "row_number": 22,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 118,
+      "row_number": 22,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 119,
+      "row_number": 22,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 120,
+      "row_number": 22,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 121,
+      "row_number": 22,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev's friend Kabir' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 122,
+      "row_number": 23,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 123,
+      "row_number": 23,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '11/03/2026' interpreted as DD/MM/YYYY (March 11). Could also be November 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 124,
+      "row_number": 23,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 125,
+      "row_number": 23,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 126,
+      "row_number": 23,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 127,
+      "row_number": 23,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 128,
+      "row_number": 24,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 129,
+      "row_number": 24,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '11/03/2026' interpreted as DD/MM/YYYY (March 11). Could also be November 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 130,
+      "row_number": 24,
+      "anomaly_type": "NEAR_DUPLICATE",
+      "severity": "WARNING",
+      "description": "Potential duplicate of row 23 based on venue and participants.",
+      "suggested_action": "FLAGGED: Human review required",
+      "auto_resolved": false
+    },
+    {
+      "id": 131,
+      "row_number": 24,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 132,
+      "row_number": 24,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 133,
+      "row_number": 24,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 134,
+      "row_number": 24,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 135,
+      "row_number": 25,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Dev' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 136,
+      "row_number": 25,
+      "anomaly_type": "FOREIGN_CURRENCY",
+      "severity": "ERROR",
+      "description": "Currency is USD, which requires an exchange rate.",
+      "suggested_action": "FLAGGED: Provide exchange rate to base currency",
+      "auto_resolved": false
+    },
+    {
+      "id": 137,
+      "row_number": 25,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '12/03/2026' interpreted as DD/MM/YYYY (March 12). Could also be December 3 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 138,
+      "row_number": 25,
+      "anomaly_type": "NEGATIVE_AMOUNT",
+      "severity": "ERROR",
+      "description": "Amount is negative.",
+      "suggested_action": "FLAGGED: Review if settlement or expense",
+      "auto_resolved": false
+    },
+    {
+      "id": 139,
+      "row_number": 25,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 140,
+      "row_number": 25,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 141,
+      "row_number": 25,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 142,
+      "row_number": 25,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 143,
+      "row_number": 26,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 144,
+      "row_number": 26,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "INCOMPLETE_DATE: 'Mar 14' has no year. Assumed 2026.",
+      "suggested_action": "AUTO_FIXED: Assigned 2026",
+      "auto_resolved": true
+    },
+    {
+      "id": 145,
+      "row_number": 26,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 146,
+      "row_number": 26,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 147,
+      "row_number": 26,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 148,
+      "row_number": 26,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Dev' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 149,
+      "row_number": 27,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Priya' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 150,
+      "row_number": 27,
+      "anomaly_type": "MISSING_CURRENCY",
+      "severity": "WARNING",
+      "description": "Currency is missing.",
+      "suggested_action": "AUTO_FIXED: Defaulted to INR",
+      "auto_resolved": true
+    },
+    {
+      "id": 151,
+      "row_number": 27,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 152,
+      "row_number": 27,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 153,
+      "row_number": 27,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 154,
+      "row_number": 27,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 155,
+      "row_number": 28,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 156,
+      "row_number": 28,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 157,
+      "row_number": 28,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 158,
+      "row_number": 28,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 159,
+      "row_number": 28,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 160,
+      "row_number": 29,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Meera' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 161,
+      "row_number": 29,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 162,
+      "row_number": 29,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 163,
+      "row_number": 29,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 164,
+      "row_number": 29,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 165,
+      "row_number": 30,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Priya' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 166,
+      "row_number": 30,
+      "anomaly_type": "ZERO_AMOUNT",
+      "severity": "ERROR",
+      "description": "Amount is zero.",
+      "suggested_action": "FLAGGED: Provide non-zero amount or skip",
+      "auto_resolved": false
+    },
+    {
+      "id": 167,
+      "row_number": 30,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 168,
+      "row_number": 30,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 169,
+      "row_number": 30,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 170,
+      "row_number": 30,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 171,
+      "row_number": 31,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Meera' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 172,
+      "row_number": 31,
+      "anomaly_type": "INVALID_PERCENTAGES",
+      "severity": "ERROR",
+      "description": "Percentages sum to 110, not 100.",
+      "suggested_action": "FLAGGED: Adjust percentages",
+      "auto_resolved": false
+    },
+    {
+      "id": 173,
+      "row_number": 31,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 174,
+      "row_number": 31,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 175,
+      "row_number": 31,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 176,
+      "row_number": 31,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 177,
+      "row_number": 32,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 178,
+      "row_number": 32,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 179,
+      "row_number": 32,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 180,
+      "row_number": 32,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 181,
+      "row_number": 32,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 182,
+      "row_number": 33,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 183,
+      "row_number": 33,
+      "anomaly_type": "AMBIGUOUS_DATE",
+      "severity": "WARNING",
+      "description": "AMBIGUOUS_DATE: '04/05/2026' interpreted as DD/MM/YYYY (May 4). Could also be April 5 (MM/DD/YYYY). Verify.",
+      "suggested_action": "AUTO_FIXED: Interpreted as DD/MM",
+      "auto_resolved": true
+    },
+    {
+      "id": 184,
+      "row_number": 33,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 185,
+      "row_number": 33,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 186,
+      "row_number": 33,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 187,
+      "row_number": 34,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 188,
+      "row_number": 34,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 189,
+      "row_number": 34,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 190,
+      "row_number": 34,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 191,
+      "row_number": 35,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Priya' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 192,
+      "row_number": 35,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 193,
+      "row_number": 35,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 194,
+      "row_number": 35,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 195,
+      "row_number": 35,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Meera' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 196,
+      "row_number": 36,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Rohan' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 197,
+      "row_number": 36,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 198,
+      "row_number": 36,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 199,
+      "row_number": 36,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 200,
+      "row_number": 37,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Sam' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 201,
+      "row_number": 37,
+      "anomaly_type": "SETTLEMENT_AS_EXPENSE",
+      "severity": "WARNING",
+      "description": "Row looks like a settlement but is logged as an expense.",
+      "suggested_action": "AUTO_FIXED: Convert to Settlement record",
+      "auto_resolved": true
+    },
+    {
+      "id": 202,
+      "row_number": 37,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 203,
+      "row_number": 38,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Sam' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 204,
+      "row_number": 38,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 205,
+      "row_number": 38,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 206,
+      "row_number": 38,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 207,
+      "row_number": 38,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Sam' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 208,
+      "row_number": 39,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 209,
+      "row_number": 39,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 210,
+      "row_number": 39,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 211,
+      "row_number": 39,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 212,
+      "row_number": 39,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Sam' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 213,
+      "row_number": 40,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Sam' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 214,
+      "row_number": 40,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 215,
+      "row_number": 40,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 216,
+      "row_number": 40,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 217,
+      "row_number": 40,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Sam' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 218,
+      "row_number": 41,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Aisha' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 219,
+      "row_number": 41,
+      "anomaly_type": "SPLIT_TYPE_CONFLICT",
+      "severity": "WARNING",
+      "description": "Split type is 'equal' but 'split_details' are provided.",
+      "suggested_action": "AUTO_FIXED: Changed split_type to 'unequal'",
+      "auto_resolved": true
+    },
+    {
+      "id": 220,
+      "row_number": 41,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 221,
+      "row_number": 41,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 222,
+      "row_number": 41,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 223,
+      "row_number": 41,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Sam' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 224,
+      "row_number": 42,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Payer 'Priya' is not a known member.",
+      "suggested_action": "FLAGGED: Assign to known member or add member",
+      "auto_resolved": false
+    },
+    {
+      "id": 225,
+      "row_number": 42,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Aisha' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 226,
+      "row_number": 42,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Rohan' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 227,
+      "row_number": 42,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Priya' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    },
+    {
+      "id": 228,
+      "row_number": 42,
+      "anomaly_type": "UNKNOWN_PARTICIPANT",
+      "severity": "ERROR",
+      "description": "Participant 'Sam' is unknown.",
+      "suggested_action": "FLAGGED: Assign to known member",
+      "auto_resolved": false
+    }
+  ],
+  "exchange_rate_used": "84.0",
+  "timestamp": "2026-06-15T07:35:41.677035Z"
+}
